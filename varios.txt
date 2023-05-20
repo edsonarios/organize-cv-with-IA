@@ -1,0 +1,22 @@
+industry: arquitectura-y-planificacion,audiovisual,biotecnologia,desarrollo-de-programacion,diseno-grafico,entretenimiento,equipos-informaticos,ingenieria,internet,portales-web-proceso-de-datos-hosting-y-act.-relac.,servicios-y-tecnologia-de-la-informacion,telecomunicaciones
+
+category: informatica-telecomunicaciones,ingenieros-tecnicos,marketing-comunicacion,otros
+
+informatica-telecomunicaciones:[-,administracion-bases-datos,analisis,arquitectura,calidad,erp-crm-business-intelligence,it-gestion-proyectos,hardware-redes-seguridad,helpdesk,programacion,sistemas,telecomunicaciones]
+
+ingenieros-tecnicos:[-,aeronautico,agronomo-montes,electronica,electronica-automatica-industrial,energias-renovables,geologia-geodesia-cartografia,industrial,minas,naval-oceanico,organizacion-industrial,otras-ingenierias,quimico,sistemas-defensa]
+
+marketing-comunicacion:[-,comunicacion-corporativa,desarrollo-marca-producto,investigacion-mercados,marketing,periodismo-edicion,produccion,publicidad,rrpp-eventos,tecnicas-audiovisuales]
+
+level: mando-intermedio,director-area,director-general,consejo-directivo,nadie-autonomo-freelance,
+
+subcategories:
+
+onCourse: true,false
+startingDate: 2017-01-31
+finishingDate: 2018-11-30
+"expertise": [
+               {
+                   "skill": "MQTT"
+               },
+               ]
