@@ -1,0 +1,47 @@
+{
+    "id": "34230398109",
+    "company": "PATELECOM",
+    "job": "Back End Developer",
+    "description": "Lideré un equipo de 5 miembros para desarrollar un Invernadero Automatizado utilizando datos de temperatura y humedad en tiempo real, para la automatización de puertas y ventanas, programación de riego automatizado, todo controlado desde un sistema integrado y desplegado en un servidor AWS, contando con persistencia local.",
+    "startingDate": "2017-02-01",
+    "finishingDate": "2018-12-01",
+    "onCourse": false,
+    "category": "informatica-telecomunicaciones",
+    "subcategories": [
+        "programacion",
+        "sistemas",
+        "iot"
+    ],
+    "level": "especialista",
+    "visible": true,
+    "industry": "telecomunicaciones",
+    "expertise": [
+        {
+            "skill": "NodeJS"
+        },
+        {
+            "skill": "Express.js"
+        },
+        {
+            "skill": "MQTT"
+        },
+        {
+            "skill": "Socket.io"
+        },
+        {
+            "skill": "API-Rest"
+        },
+        {
+            "skill": "PostgreSQL Database"
+        },
+        {
+            "skill": "AWS"
+        },
+        {
+            "skill": "Git"
+        },
+        {
+            "skill": "GitHub"
+        }
+    ]
+}

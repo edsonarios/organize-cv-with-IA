@@ -22,24 +22,26 @@ subcategories opciones:
 
     otros:[-]
 
-{
-    "id": "34230398109",
-    "company": "",
-    "job": "",
-    "description": "",
-    "startingDate": "",
-    "finishingDate": "",
-    "onCourse": false,
-    "category":"",
-    "subcategories": [],
-    "level":"",
-    "visible": true,
-    "industry": "",
-    "expertise": [
-               {
-                   "skill": ""
-               },
-    ]
-}
+[
+    {
+        "id": "",
+        "company": "",
+        "job": "",
+        "description": "",
+        "startingDate": "",
+        "finishingDate": "",
+        "onCourse": false,
+        "category":"",
+        "subcategories": [],
+        "level":"",
+        "visible": true,
+        "industry": "",
+        "expertise": [
+                {
+                    "skill": ""
+                },
+        ]
+    }
+]
 
-IMPORTANTE: Responde el JSON generado en un bloque de codigo, sin ningun texto adicional fuera del bloque de codigo
+IMPORTANTE: Si tiene mas de 1 experiencia, repartir en multiples elementos del array y dejar el id vacio
