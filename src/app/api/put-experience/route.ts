@@ -12,7 +12,7 @@ export async function PUT (request: Request) {
     }
   }
   const body = { cvtext: cv }
-  const response = await fetch('https://api.infojobs.net/api/1/curriculum/d1e4835e-bf61-4d26-8785-5ac4833ec415/cvtext', {
+  const response = await fetch('https://api.infojobs.net/api/4/curriculum/d1e4835e-bf61-4d26-8785-5ac4833ec415/experience', {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json',

@@ -1,0 +1,37 @@
+Sergio Valdez Lozano
+
+Full Stack Developer | JavaScript | Node.js | React | Python | Django
+
+Sucre – Bolivia • sergiovaldez@gmail.com • Linkedin: /in/sergio-valdez/ • +591 78784910
+
+Resumen
+
+Ingeniero de software con más de 6 años de experiencia en desarrollo Full Stack. Experto en tecnologías de vanguardia como JavaScript, Node.js, React, Python y Django. Tengo una sólida base en el diseño y desarrollo de aplicaciones de alto rendimiento, escalables y seguras.
+
+Experiencia
+
+FASTECH
+Sucre – Bolivia
+Full Stack Developer
+2018 Apr – Present
+En FASTECH, trabajo en la creación y mantenimiento de aplicaciones web y móviles, utilizando un stack de tecnologías modernas que incluye JavaScript, Node.js, React, Python y Django. También soy responsable de la integración y el mantenimiento de bases de datos en PostgreSQL y MongoDB.
+
+REDGATE
+Sucre – Bolivia
+Backend Developer
+2015 Mar – 2018 Mar
+En REDGATE, estuve a cargo del desarrollo del back-end de varias aplicaciones web, utilizando principalmente Node.js y Python. Fui responsable de la integración de las APIs, gestión de las bases de datos y seguridad de las aplicaciones.
+
+Educación
+
+Universidad Mayor de San Simón (UMSS) – Licenciatura en Ingeniería de Sistemas
+2010 – 2015
+Adquirí un profundo conocimiento teórico y práctico de los sistemas informáticos, incluyendo programación, arquitectura de software, administración de sistemas, redes y bases de datos.
+
+M.Sc. in Software Engineering – Georgia Institute of Technology (Online Degree)
+2018 – 2020
+Esta maestría me proporcionó una formación avanzada en ingeniería de software, con una especialización en el diseño de software a gran escala, pruebas y mantenimiento de software.
+
+Full Stack Web Development Certificate – Codecademy
+2017
+Este curso de certificación me proporcionó habilidades en desarrollo Full Stack, incluyendo HTML, CSS, JavaScript, Node.js, Express, React, y bases de datos MongoDB.

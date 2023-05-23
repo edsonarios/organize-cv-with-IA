@@ -3,7 +3,7 @@ Te mandare una descripcion completa de un CV y armaras en un JSON con los datos 
 - En startingDate y finishingDate debe tener este formato: "AAAA-MM-DD"
 Si fuera su trabajo actual finishingDate debe estar vacio
 
-- En level, debe estar una de las siguientes opciones, sino aplicara ninguno solo poner "seleccionar": becario-a-practicas,empleado-a,especialista,mando-intermedio,direccion-gerencia,consejo-directivo
+- En level, debe estar una de las siguientes opciones, sino aplicara ninguno solo poner "seleccionar": becario-a-practicas,empleado-a
 
 - En expertise debes colocar los keywords relacionados con en CV, cada keyword es un json con el atributo skill, maximo 15 elementos, puede ser cualquier keyword, ejemplo: NodeJS, Python, Java, etc.
 
@@ -45,3 +45,60 @@ subcategories opciones:
 ]
 
 IMPORTANTE: Si tiene mas de 1 experiencia, repartir en multiples elementos del array y dejar el id vacio
+
+-------------------------------------------------
+Te mandare una parte de un CV y armaras un JSON con los datos segun corresponda, algunos cmapos tendran restricciones, pero solo modificaras algunos campos: name, surname1, surname2, country, province, cityName, internationalPhone, nationalities, birthDay
+
+- En el campo de country solo escoger entre los siguientes, sino aplicara ninguno colocar "otro": bolivia,costa-rica,cuba,ecuador,el-salvador,guatemala,haiti,honduras,nicaragua,panama,paraguay,peru,puerto-rico,republica-dominicana,uruguay
+
+- En el campo de province escoger lo mismo que country, pero si es "otro" escoger "otro-pais"
+
+- En el campo de nationalities, puede tener un array de las mismas opciones de country, si no aplica ninguno, colocar "otro"
+
+- En birthDay debe tener el formato "AAAA-MM-DD", sino se puede obtener, colocar por defecto "1990-01-01"
+{
+    "name": "",
+    "surname1": "",
+    "surname2": "",
+    "country": "",
+    "province": "",
+    "cityName": "",
+    "preferredContactPhone": "foreign-phone",
+    "internationalPhone": "",
+    "driverLicenses": [
+        "seleccionar"
+    ],
+    "nationalities": [
+    "bolivia"
+    ],
+    "birthDay": ""
+}
+
+Importante: devolver en bloque de codigo
+
+country: argentina,brasil,chile,colombia,mexico,venezuela
+
+----------------------------------------------------------
+Te mandare una parte de un CV y armaras un JSON con los datos segun corresponda, pero solo modificaras los campos de: "educationLevelCode", "courseCode","startingDate","finishingDate","stillEnrolled","institutionName"
+
+- En el campo de startingDate y finishingDate debe tener el siguiente formato "AAAA-MM-DD", si aun esta cursando el finishingDate debera estar vacio
+
+- En el campo de "educationLevelCode", solo debe ir alguno de los siguientes valores, si no aplicara ningun todo el JSON debera estar vacio:
+educacion-secundaria-obligatoria,bachillerato,formacion-profesional-grado-superior
+
+- En el campo de "courseCode" dependera del valor de "educationLevelCode", si el valor es "formacion-profesional-grado-superior", entonces sera solo alguno de los siguientes valores, si no es "formacion-profesional-grado-superior" dejar el campo vacio:
+fp-ii-administracion,fp-ii-administracion-finanzas,fp-ii-artes-graficas,fp-ii-comercio-internacional,fp-ii-comercio-marketing,fp-ii-comunicacion-imagen-sonido,fp-ii-edificacion-obra-civil,fp-ii-electricidad-electronica,especialidad-industrial,fp-ii-fabricacion-mecanica,fp-ii-imagen-personal,fp-ii-industrias-alimentarias,fp-ii-informatica,prevencion-de-riesgos-profesionales,fp-ii-quimica,fp-ii-secretariado,sistemas-de-regulacion-y-control-automaticos,fp-ii-transporte-logistica
+
+[
+    {
+        "id": "",
+        "educationLevelCode": "",
+        "courseCode": "",
+        "startingDate": "",
+        "finishingDate": "",
+        "stillEnrolled": false,
+        "institutionName": ""
+    }
+]
+
+IMPORTANTE: Si tiene mas de una carrera profesional, repartir en multiples elementos del array, dejar el id vacio, y no es necesario que todos los items sean un elemento del array, obligatorio si "educationLevelCode" estuviera vacio, borrar todo ese elemento, no importa si al final termina un array vacio
