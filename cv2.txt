@@ -1,0 +1,37 @@
+Juan Martínez Morales
+
+Desarrollador Full Stack | Java | Spring Boot | Angular | MySQL
+
+Madrid – España • juanmartinezmorales@gmail.com • Linkedin: /in/juan-martinez-morales/ • +34 625 849 002
+
+Resumen
+
+Desarrollador de software Full Stack con 7 años de experiencia en el diseño, desarrollo e implementación de aplicaciones de software utilizando Java, Spring Boot, Angular y MySQL. Orientado a resultados, con una probada habilidad para analizar y resolver problemas complejos, y para liderar proyectos desde la concepción hasta su finalización.
+
+Experiencia
+
+BYTEWISE
+Madrid – España
+Desarrollador Full Stack
+2021 Jun – Presente
+En BYTEWISE, he trabajado en la creación y mantenimiento de aplicaciones web de alto rendimiento, usando Java, Spring Boot, Angular y MySQL. Mi trabajo incluye la implementación de nuevas funcionalidades, el mantenimiento del código existente y la resolución de errores.
+
+TECHINNOVATIONS
+Barcelona – España
+Desarrollador Back End
+2015 Ene – 2021 May
+En TECHINNOVATIONS, estuve a cargo del desarrollo del back-end de varias aplicaciones web y móviles, utilizando Java y Spring Boot. Mi trabajo implicaba la creación de APIs RESTful, la gestión de bases de datos MySQL y la implementación de soluciones de seguridad.
+
+Educación
+
+Universidad Politécnica de Madrid – Grado en Ingeniería Informática
+2010 – 2014
+Durante mi grado, adquirí una sólida base en informática, incluyendo programación, arquitectura de software, redes, bases de datos y seguridad informática.
+
+Master en Ingeniería del Software, Sistemas Informáticos y Computación – Universidad Politécnica de Madrid
+2015 – 2017
+Este máster me proporcionó una formación avanzada en ingeniería de software, con especial énfasis en el diseño de software a gran escala, pruebas de software y gestión de proyectos de software.
+
+Certificado en Desarrollo Full Stack – Codecademy
+2018
+Este curso de certificación me brindó habilidades avanzadas en desarrollo Full Stack, incluyendo Java, Spring Boot, Angular y bases de datos MySQL.

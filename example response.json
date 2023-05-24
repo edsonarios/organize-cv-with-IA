@@ -1,47 +1,83 @@
 {
-    "id": "34230398109",
-    "company": "PATELECOM",
-    "job": "Back End Developer",
-    "description": "Lideré un equipo de 5 miembros para desarrollar un Invernadero Automatizado utilizando datos de temperatura y humedad en tiempo real, para la automatización de puertas y ventanas, programación de riego automatizado, todo controlado desde un sistema integrado y desplegado en un servidor AWS, contando con persistencia local.",
-    "startingDate": "2017-02-01",
-    "finishingDate": "2018-12-01",
-    "onCourse": false,
-    "category": "informatica-telecomunicaciones",
-    "subcategories": [
-        "programacion",
-        "sistemas",
-        "iot"
+    personalData: {
+      name: 'Sergio',
+      surname1: 'Valdez',
+      surname2: 'Lozano',
+      country: 'bolivia',
+      province: 'bolivia',
+      cityName: 'Sucre',
+      preferredContactPhone: 'foreign-phone',
+      internationalPhone: '+59178784910',
+      driverLicenses: [ 'seleccionar' ],
+      nationalities: [ 'bolivia' ],
+      birthDay: '1990-01-01'
+    },
+    experience: [
+      {
+        id: '',
+        company: 'FASTECH',
+        job: 'Full Stack Developer',
+        description: 
+          'Creación y mantenimiento de aplicaciones web y móviles utilizando un stack de tecnologías modernas que incluye JavaScript, Node.js, React, Python y Django. Responsable de la integración y el mantenimiento de bases de datos en PostgreSQL y MongoDB.',
+        startingDate: '2018-04-01',
+        finishingDate: '',
+        onCourse: true,
+        category: 'informatica-telecomunicaciones',
+        subcategories: [ 'programacion', 'bases-de-datos' ],
+        level: 'empleado-a',
+        visible: true,
+        industry: 'servicios-y-tecnologia-de-la-informacion',
+        expertise: [
+          { skill: 'JavaScript' }, { skill: 'Node.js' }, { skill: 'React' }, { skill: 'Python' }, { skill: 'Django' }
+        ]
+      }, {
+        id: '',
+        company: 'REDGATE',
+        job: 'Backend Developer',
+        description: 
+          'Desarrollo del back-end de varias aplicaciones web, utilizando principalmente Node.js y Python. Responsable de la integración de las APIs, gestión de las bases de datos y seguridad de las aplicaciones.',
+        startingDate: '2015-03-01',
+        finishingDate: '2018-03-01',
+        onCourse: false,
+        category: 'informatica-telecomunicaciones',
+        subcategories: [ 'programacion', 'bases-de-datos' ],
+        level: 'empleado-a',
+        visible: true,
+        industry: 'servicios-y-tecnologia-de-la-informacion',
+        expertise: [ { skill: 'Node.js' }, { skill: 'Python' } ]
+      },
+      
     ],
-    "level": "especialista",
-    "visible": true,
-    "industry": "telecomunicaciones",
-    "expertise": [
-        {
-            "skill": "NodeJS"
-        },
-        {
-            "skill": "Express.js"
-        },
-        {
-            "skill": "MQTT"
-        },
-        {
-            "skill": "Socket.io"
-        },
-        {
-            "skill": "API-Rest"
-        },
-        {
-            "skill": "PostgreSQL Database"
-        },
-        {
-            "skill": "AWS"
-        },
-        {
-            "skill": "Git"
-        },
-        {
-            "skill": "GitHub"
-        }
+    education: [
+      {
+        id: '',
+        educationLevelCode: 'ingeniero-superior',
+        courseCode: '',
+        courseName: '',
+        startingDate: '2010-01-01',
+        finishingDate: '2015-01-01',
+        stillEnrolled: false,
+        institutionName: 'Universidad Mayor de San Simón (UMSS)'
+      }, {
+        id: '',
+        educationLevelCode: 'otros-cursos-y-formacion-no-reglada',
+        courseCode: '',
+        courseName: 'Full Stack Web Development Certificate',
+        startingDate: '2017-01-01',
+        finishingDate: '2017-12-31',
+        stillEnrolled: false,
+        institutionName: 'Codecademy'
+      },
+      {
+        id: '',
+        educationLevelCode: 'postgrado',
+        courseCode: '',
+        courseName: 'M.Sc. in Software Engineering',
+        startingDate: '2018-01-01',
+        finishingDate: '2020-12-31',
+        stillEnrolled: false,
+        institutionName: 'Georgia Institute of Technology (Online Degree)'
+      },
+      
     ]
-}
+  }

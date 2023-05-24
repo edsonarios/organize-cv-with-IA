@@ -49,13 +49,18 @@ IMPORTANTE: Si tiene mas de 1 experiencia, repartir en multiples elementos del a
 -------------------------------------------------
 Te mandare una parte de un CV y armaras un JSON con los datos segun corresponda, algunos cmapos tendran restricciones, pero solo modificaras algunos campos: name, surname1, surname2, country, province, cityName, internationalPhone, nationalities, birthDay
 
-- En el campo de country solo escoger entre los siguientes, sino aplicara ninguno colocar "otro": bolivia,costa-rica,cuba,ecuador,el-salvador,guatemala,haiti,honduras,nicaragua,panama,paraguay,peru,puerto-rico,republica-dominicana,uruguay
+Te mandare un CV y deberas armar y llenar con los datos segun corresponda, algunos campos tendran restricciones, pero solo modificar: name, surname1, surname2, country, province, cityName, zipCode, internationalPhone, nationalities, birthDay
 
-- En el campo de province escoger lo mismo que country, pero si es "otro" escoger "otro-pais"
+- En el campo de "country" debe tener el siguiente formato "puerto-rico"
 
-- En el campo de nationalities, puede tener un array de las mismas opciones de country, si no aplica ninguno, colocar "otro"
+- En el campo de "province" debe tener el siguiente formato "alicante-alacant", sino aplicara algun valor valido, copiar el mismo valor de country, y si country es igual a "otro" entonces su valor sera "otro-pais"
 
-- En birthDay debe tener el formato "AAAA-MM-DD", sino se puede obtener, colocar por defecto "1990-01-01"
+- En el campo de "nationalities", puede tener un array de las mismas opciones de country, si no aplica ninguno, colocar ["otro"]
+
+- En el campo de "birthDay" debe tener el formato "AAAA-MM-DD", sino se puede obtener, colocar por defecto "1990-01-01"
+
+- En el campo de "zipCode" tendra algun numero entero de 5 cifras, solo si, el valor de "country" es "españa", sino dejar vacio
+
 {
     "name": "",
     "surname1": "",
@@ -63,6 +68,7 @@ Te mandare una parte de un CV y armaras un JSON con los datos segun corresponda,
     "country": "",
     "province": "",
     "cityName": "",
+    "zipCode": "10000",
     "preferredContactPhone": "foreign-phone",
     "internationalPhone": "",
     "driverLicenses": [
@@ -74,9 +80,7 @@ Te mandare una parte de un CV y armaras un JSON con los datos segun corresponda,
     "birthDay": ""
 }
 
-Importante: devolver en bloque de codigo
-
-country: argentina,brasil,chile,colombia,mexico,venezuela
+mantener la estructura del json de ejemplo y devolver en un bloque de codigo
 
 ----------------------------------------------------------
 Te mandare una parte de un CV y armaras un JSON con los datos segun corresponda, pero solo modificaras los campos de: "educationLevelCode", "courseCode","startingDate","finishingDate","stillEnrolled","institutionName"
