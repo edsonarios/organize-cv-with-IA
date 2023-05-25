@@ -1,6 +1,7 @@
-// import { Response } from '@/types/infojobs/response'
 import { Education, Experience, PersonalData, responseIA } from '@/types/responseIA'
 import { getDictionary } from './request'
+import { Dictionary } from '@/types/infojobs/response'
+
 const DICTIONARY_COUNTRY = 'country'
 const DICTIONARY_PROVINCE = 'province'
 const OTRO = 'otro'
@@ -11,6 +12,12 @@ const CATEGORY = 'category'
 const SUBCATEGORY = 'subcategory'
 const STUDY = 'study'
 const STUDY_DETAIL = 'study-detail'
+
+let levelPromise: Promise<Dictionary[]> | null = null
+let categoryPromise: Promise<Dictionary[]> | null = null
+let subcategoryPromise: Promise<Dictionary[]> | null = null
+let educationPromise: Promise<Dictionary[]> | null = null
+let courseCodePromise: Promise<Dictionary[]> | null = null
 
 export const cleanResponse = async (data: responseIA) => {
   console.log(data)
@@ -73,15 +80,23 @@ const cleanPersonalData = async (personalData: PersonalData) => {
 }
 
 const cleanExperience = async (experience: Experience) => {
+  if (levelPromise == null) {
+    levelPromise = getDictionary(LEVEL)
+  }
+  const level = await levelPromise
+
   // Validate level
-  const level = await getDictionary(LEVEL)
   const levelKeys = level.map(level => level.key)
   if (!levelKeys.includes(experience.level)) {
     experience.level = 'seleccionar'
   }
 
+  if (categoryPromise == null) {
+    categoryPromise = getDictionary(CATEGORY)
+  }
+  const category = await categoryPromise
+
   // Validate category
-  const category = await getDictionary(CATEGORY)
   const categoryKeys = category.map(category => category.key)
   if (!categoryKeys.includes(experience.category)) {
     experience.category = 'otros'
@@ -90,7 +105,11 @@ const cleanExperience = async (experience: Experience) => {
   console.log(experience.subcategories.some(subcategory => subcategory.includes('-')))
   // Validate subcategory
   if (experience.subcategories.length > 0 && !experience.subcategories.some(subcategory => subcategory.includes('-'))) {
-    const subcategory = await getDictionary(SUBCATEGORY)
+    if (subcategoryPromise == null) {
+      subcategoryPromise = getDictionary(SUBCATEGORY)
+    }
+    const subcategory = await subcategoryPromise
+
     console.log(subcategory)
     const categoryValid = category.find((category) => category.key === experience.category)
     console.log(categoryValid)
@@ -123,8 +142,12 @@ const cleanExperience = async (experience: Experience) => {
 }
 
 const cleanEducation = async (education: Education) => {
+  if (educationPromise == null) {
+    educationPromise = getDictionary(STUDY)
+  }
+  const educationCode = await educationPromise
+
   // Validate educacionLevelCode
-  const educationCode = await getDictionary(STUDY)
   const educationCodeKey = educationCode.map(education => education.key)
   if (!educationCodeKey.includes(education.educationLevelCode)) {
     education.educationLevelCode = 'bachillerato'
@@ -136,7 +159,10 @@ const cleanEducation = async (education: Education) => {
   const condition = conditionToCoureCodeFromEducationLevelCode.includes(education.educationLevelCode)
 
   if (!condition) {
-    const courseCode = await getDictionary(STUDY_DETAIL)
+    if (courseCodePromise == null) {
+      courseCodePromise = getDictionary(STUDY_DETAIL)
+    }
+    const courseCode = await courseCodePromise
 
     const educationLevelCodeValid = educationCode.find((educationCode) => educationCode.key === education.educationLevelCode)
     console.log(educationLevelCodeValid)

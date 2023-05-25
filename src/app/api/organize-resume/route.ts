@@ -177,7 +177,7 @@ export async function GET (request: Request) {
     // console.log(json)
     const json = await cleanResponse(fakeData)
     console.log(json)
-    await madeRequests(json)
+    // await madeRequests(json)
     return NextResponse.json(json)
   } catch {
     return new Response('No se ha podido transformar el JSON', { status: 500 })
@@ -210,7 +210,7 @@ const fakeData = {
       finishingDate: '',
       onCourse: true,
       category: 'informatica-telecomunicaciones',
-      subcategories: ['programacion'],
+      subcategories: ['programacion', 'otros'],
       level: 'empleado-a',
       visible: true,
       expertise: [
