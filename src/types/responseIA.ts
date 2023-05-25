@@ -24,7 +24,6 @@ export interface Experience {
   subcategories: string[]
   level: string
   visible: boolean
-  industry: string
   expertise: Array<{ skill: string }>
 }
 

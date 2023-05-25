@@ -51,17 +51,15 @@ Armar y llenar con los datos segun corresponda, pero solo modificaras los campos
 - Si tiene mas de 1 experiencia, repartir en multiples elementos del array y dejar el id vacio
 
 - En los campos de "startingDate" y "finishingDate" debe tener este formato: "AAAA-MM-DD"
-Si fuera su trabajo actual "finishingDate" debe estar vacio
+Si aun no hay fecha de terminado su trabajo, el campo de "finishingDate" debe estar vacio
 
-- En el campo de "level", debe estar una de las siguientes opciones, sino aplicara ninguno solo poner "seleccionar": becario-a-practicas,empleado-a
+- En el campo de "level", debe estar solo una de las siguientes opciones, sino aplicara ninguno solo poner "seleccionar": becario-a-practicas,empleado-a
 
-- En el campo de "expertise" debes colocar los keywords relacionados con en CV, cada keyword es un json con el atributo skill, maximo 15 elementos, puede ser cualquier keyword, ejemplo: NodeJS, Python, Java, etc.
-
-- En el campo de "industry" se debe alguno de las siguientes opciones, en caso de que no aplique ninguno tendra el valor de "seleccionar": arquitectura-y-planificacion,audiovisual,biotecnologia,desarrollo-de-programacion,diseno-grafico,entretenimiento,equipos-informaticos,ingenieria,internet,portales-web-proceso-de-datos-hosting-y-act.-relac.,servicios-y-tecnologia-de-la-informacion,telecomunicaciones
+- En el campo de "expertise" debes colocar los keywords relacionados con el CV, cada keyword es un json con el atributo skill, maximo 15 elementos, puede ser cualquier keyword, ejemplo: NodeJS, Python, Java, etc.
 
 - En el campo de "category", puede ir solo uno de las siguientes opciones: informatica-telecomunicaciones,ingenieros-tecnicos,marketing-comunicacion,otros
 
-- En el campo de "subcategories", es dependiendo de "category" pero es un array de las siguientes opciones, al menos debe estar 1 opcion y sino estuviera ninguno añadir "-":
+- En el campo de "subcategories", es dependiendo de "category" pero es un array de las siguientes opciones, al menos debe estar 1 opcion y sino estuviera ninguno añadir solo "-":
 
 subcategories opciones:
     informatica-telecomunicaciones:[administracion-bases-datos,analisis,arquitectura,calidad,erp-crm-business-intelligence,it-gestion-proyectos,hardware-redes-seguridad,helpdesk,programacion,sistemas,telecomunicaciones,-]
@@ -85,7 +83,6 @@ subcategories opciones:
         "subcategories": [],
         "level":"",
         "visible": true,
-        "industry": "",
         "expertise": [
                 {
                     "skill": ""
@@ -97,7 +94,7 @@ subcategories opciones:
 SECCION "education"
 Armar y llenar un JSON con los datos segun corresponda, pero solo modificaras los campos de: "educationLevelCode", "courseCode","startingDate","finishingDate","stillEnrolled","institutionName"
 
-- En el campo de startingDate y finishingDate debe tener el siguiente formato "AAAA-MM-DD", si aun esta cursando el finishingDate debera estar vacio
+- En el campo de "startingDate" y "finishingDate" debe tener el siguiente formato "AAAA-MM-DD", si aun esta cursando el finishingDate debera estar vacio
 
 - En el campo de "educationLevelCode", primero verificar si las opciones de "courseCode" estan acorde a la educacion, y luego rellenar "educationLevelCode" con su key, sino aplicara ninguno y entonces recien verificar si se acerca mas a las opciones de "postgrado,master,otros-titulos-certificaciones-y-carnes,otros-cursos-y-formacion-no-reglada", las opciones de "educationLevelCode" son:
 educacion-secundaria-obligatoria,bachillerato,formacion-profesional-grado-superior,licenciado,ingeniero-superior,postgrado,master,otros-titulos-certificaciones-y-carnes,otros-cursos-y-formacion-no-reglada
