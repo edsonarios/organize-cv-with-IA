@@ -33,5 +33,5 @@ Master en Ingeniería del Software, Sistemas Informáticos y Computación – Un
 Este máster me proporcionó una formación avanzada en ingeniería de software, con especial énfasis en el diseño de software a gran escala, pruebas de software y gestión de proyectos de software.
 
 Certificado en Desarrollo Full Stack – Codecademy
-2018
+2018 - 2019
 Este curso de certificación me brindó habilidades avanzadas en desarrollo Full Stack, incluyendo Java, Spring Boot, Angular y bases de datos MySQL.

@@ -1,5 +1,6 @@
-import { Dictionary } from '@/types/infojobs/response'
+import { Dictionary, ResponseEducation, ResponseExperience, ResponsePersonalData, UIErrorResponse } from '@/types/infojobs/response'
 import { Education, Experience, PersonalData, responseIA } from '@/types/responseIA'
+import { isError } from '@/utils/utils'
 
 const infoJobsToken = process.env.INFOJOBS_TOKEN ?? ''
 const INFOJOBS_API = 'https://api.infojobs.net/api/'
@@ -76,24 +77,64 @@ export async function getDictionary (dictionaryId: string): Promise<Dictionary[]
 }
 
 export async function madeRequests (data: responseIA) {
-  console.log(data)
-  if (Object.keys(data.personalData).length > 0) {
-    console.log(data.personalData)
-    const response = await putPersonalData(data.personalData)
-    console.log(response)
+  let personalDataResult: ResponsePersonalData | null = null
+  let experienceResult: ResponseExperience [] = []
+  let educationResult: ResponseEducation [] = []
+  const UIErrorResponse: UIErrorResponse[] = []
+
+  try {
+    if (Object.keys(data.personalData).length > 0) {
+      personalDataResult = await putPersonalData(data.personalData)
+      if ((personalDataResult != null) && isError(personalDataResult)) {
+        UIErrorResponse.push({
+          type: 'personalData',
+          errorCode: personalDataResult.error,
+          error_description: personalDataResult.error_description,
+          body: data.personalData
+        })
+        personalDataResult = null
+      }
+    }
+
+    if (Object.keys(data.experience).length > 0) {
+      const promises = data.experience.map(putExperience)
+      experienceResult = await Promise.all(promises)
+      experienceResult.forEach((res, i) => {
+        if (isError(res)) {
+          UIErrorResponse.push({
+            type: 'experience',
+            errorCode: res.error,
+            error_description: res.error_description,
+            body: data.experience[i]
+          })
+        }
+      })
+      experienceResult = experienceResult.filter(result => !isError(result))
+    }
+
+    if (Object.keys(data.education).length > 0) {
+      const promises = data.education.map(putEducation)
+      educationResult = await Promise.all(promises)
+      educationResult.forEach((res, i) => {
+        if (isError(res)) {
+          UIErrorResponse.push({
+            type: 'education',
+            errorCode: res.error,
+            error_description: res.error_description,
+            body: data.education[i]
+          })
+        }
+      })
+      educationResult = educationResult.filter(result => !isError(result))
+    }
+  } catch (error) {
+    console.log(error)
   }
-  if (Object.keys(data.experience).length > 0) {
-    console.log(data.experience)
-    data.experience.map(async item => {
-      const response = await putExperience(item)
-      console.log(response)
-    })
-  }
-  if (Object.keys(data.education).length > 0) {
-    console.log(data.education)
-    data.education.map(async item => {
-      const response = await putEducation(item)
-      console.log(response)
-    })
+
+  return {
+    personalData: personalDataResult,
+    experience: experienceResult,
+    education: educationResult,
+    UIErrorResponse
   }
 }

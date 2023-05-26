@@ -5,6 +5,7 @@ export interface PersonalData {
   country: string
   province: string
   cityName: string
+  zipCode: string
   preferredContactPhone: string
   internationalPhone: string
   driverLicenses: string[]

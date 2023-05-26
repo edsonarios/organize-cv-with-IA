@@ -9,7 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@heroicons/react": "^2.0.18",
+    "@heroicons/react": "^1.0.6",
     "@s-ui/react-atom-button": "^1.90.0",
     "@tremor/react": "^2.7.0",
     "@types/node": "20.1.7",

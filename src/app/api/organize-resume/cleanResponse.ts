@@ -63,6 +63,11 @@ const cleanPersonalData = async (personalData: PersonalData) => {
     personalData.province = OTRO_PAIS
   }
 
+  // validate zipCode
+  if (personalData.country === 'espana' && personalData.zipCode === '') {
+    personalData.zipCode = '10000'
+  }
+
   // Validate nationalities
   personalData.nationalities = personalData.nationalities.map(nationaliti => nationaliti.normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/ñ/g, 'n').replace(/ü/g, 'u'))
   const countryKeys = countrys.map(country => country.key)
@@ -202,6 +207,11 @@ const cleanEducation = async (education: Education) => {
   // Validate finishingDate
   if (!datePattern.test(education.finishingDate)) {
     education.finishingDate = '1990-01-01'
+  }
+  if (education.educationLevelCode === 'otros-titulos-certificaciones-y-carnes' && education.stillEnrolled) {
+    education.finishingDate = (education.startingDate !== '') ? education.startingDate : education.finishingDate
+    education.startingDate = ''
+    education.stillEnrolled = false
   }
   if (education.stillEnrolled) {
     education.finishingDate = ''

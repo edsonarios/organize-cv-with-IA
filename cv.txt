@@ -33,5 +33,5 @@ M.Sc. in Software Engineering – Georgia Institute of Technology (Online Degree
 Esta maestría me proporcionó una formación avanzada en ingeniería de software, con una especialización en el diseño de software a gran escala, pruebas y mantenimiento de software.
 
 Full Stack Web Development Certificate – Codecademy
-2017
+2017 - 2018
 Este curso de certificación me proporcionó habilidades en desarrollo Full Stack, incluyendo HTML, CSS, JavaScript, Node.js, Express, React, y bases de datos MongoDB.
