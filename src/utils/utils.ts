@@ -13,7 +13,7 @@ export function toUpperCamelCase (str: string) {
 }
 
 export function manageDate (date: string) {
-  if (date === undefined || date === '') return ''
+  if (date === undefined || date === '') return 'PRESENT'
   const newDate = new Date(date)
 
   return newDate.toLocaleDateString(undefined, {

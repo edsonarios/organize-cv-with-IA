@@ -18,7 +18,7 @@ export interface UIErrorResponse {
   type: string
   errorCode: string
   error_description: string
-  body: PersonalData | Experience | Education
+  body: Partial<PersonalData> | Partial<Experience> | Partial<Education>
 }
 
 export type ResponsePersonalData = {

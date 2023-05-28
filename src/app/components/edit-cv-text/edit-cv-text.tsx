@@ -1,6 +1,6 @@
 'use client'
 import { ResponseRequest } from '@/types/infojobs/response'
-import { Card, Text, Title, Button, Grid, Col } from '@tremor/react'
+import { Card, Text, Title, Button, Grid, Col, Metric, Toggle, ToggleItem } from '@tremor/react'
 import { useEffect, useRef, useState } from 'react'
 import { ExperienceList } from './experience'
 import { EducationList } from './education'
@@ -162,13 +162,21 @@ export function EditCvText () {
         ],
         UIErrorResponse: [
           {
-            error: '602',
+            type: 'education',
+            errorCode: '602',
             error_description: 'The value of educationLevelCode provided: otros-titulos-certificaciones-y-carnes123 is not valid.',
-            timestamp: '2023-05-26T17:45:38.379Z'
+            body: {
+              courseCode: 'i-sip-industrial',
+              educationLevelCode: 'ingeniero-superior'
+            }
           }, {
-            error: '500',
+            type: 'experience',
+            errorCode: '554',
             error_description: 'The value of educationLevelCode provided: otros-titulos-certificaciones-y-carnes123 is not valid.',
-            timestamp: '2023-05-26T17:45:38.379Z'
+            body: {
+              job: 'Desarrollador Full Stack',
+              company: 'BYTEWISE'
+            }
           }]
       }
 
@@ -210,23 +218,47 @@ export function EditCvText () {
             </Col>
             <Button onClick={prueba2} size='xl' variant='light' className='hover:bg-gray-100 mt-8'>ELIMINAR CV EN TEXTO</Button>
           </Grid>
-          <Button
-            size='sm' variant='secondary' className='mt-8'
-            disabled={loadingIA}
-            loading={loadingIA}
-            loadingText='Analizando con IA'
-            onClick={async (event) => {
-              event.stopPropagation()
-              await SaveCvWithIA(textAreavalue)
-            }}
-          >GUARDAR CV CON IA
-          </Button>
+          <div className='flex justify-between'>
+
+            <Button
+              size='sm' variant='secondary' className='mt-8 flex-grow mr-2'
+              disabled={loadingIA}
+              loading={loadingIA}
+              loadingText='Analizando con IA'
+              onClick={async (event) => {
+                event.stopPropagation()
+                await SaveCvWithIA(textAreavalue)
+              }}
+            >ORGANIZAR Y GUARDAR CV CON IA
+            </Button>
+            <div className='ml-4 flex flex-col items-center'>
+              <Title>Reemplazar todo CV?</Title>
+              <Toggle
+                color='zinc'
+                defaultValue='1'
+                onValueChange={(value) => console.log(value)}
+              >
+                <ToggleItem value='1' text='Off' />
+                <ToggleItem value='2' text='On' />
+              </Toggle>
+            </div>
+          </div>
         </Card>
       </div>
 
       <div className='max-w-full flex flex-col mt-5 pb-8' ref={elementoRef}>
         {iaData !== null && (
           <Card className='max-w-4xl mx-auto flex flex-col'>
+            <div className='flex justify-between'>
+              <Metric>CV Organizado</Metric>
+              <a
+                className='text-blue-500 underline text-lg'
+                href='https://www.infojobs.net/candidate/cv/view/index.xhtml'
+                target='_blank'
+                rel='noopener noreferrer'
+              >Ver CV organizado aqui...!!!
+              </a>
+            </div>
             <PersonalData personalData={iaData.personalData} />
 
             <ExperienceList experiences={iaData.experience} />
