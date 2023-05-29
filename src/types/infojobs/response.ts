@@ -30,8 +30,9 @@ export type ResponsePersonalData = {
   birthDay: string
   country: string
   province: string
-  cityCode: string
-  zipCode: string
+  cityName?: string | undefined
+  cityCode?: string | undefined
+  zipCode?: string | undefined
   preferredContactPhone: string
   internationalPhone: string
   driverLicenses: string[]
@@ -52,6 +53,7 @@ export type ResponseExperience = {
   job: string
   description: string
   startingDate: string
+  finishingDate?: string | undefined
   onCourse: boolean
   category: string
   subcategories: string[]
@@ -69,8 +71,9 @@ export type ResponseExperience = {
 export type ResponseEducation = {
   id: number
   educationLevelCode: string
-  courseCode?: string
-  startingDate: string
+  courseCode?: string | undefined
+  courseName?: string | undefined
+  startingDate?: string
   finishingDate: string
   stillEnrolled: boolean
   institutionName: string

@@ -1,7 +1,7 @@
 import { Title, Callout } from '@tremor/react'
 import { CheckCircleIcon } from '@heroicons/react/solid'
 import { ErrorResponse, ResponsePersonalData } from '@/types/infojobs/response'
-import { isError, toUpperCamelCase } from '@/utils/utils'
+import { isError, toUpperCamelCase, verifyCity } from '@/utils/utils'
 
 interface Props {
   personalData: ResponsePersonalData | ErrorResponse
@@ -9,7 +9,7 @@ interface Props {
 
 export const PersonalData: React.FC<Props> = ({ personalData }) => (
   <>
-    {personalData !== null && !isError(personalData) && (
+    {personalData !== null && Object.keys(personalData).length > 0 && !isError(personalData) && (
       <div>
         {/* <Metric className=''>Datos personales Actualizados</Metric> */}
         <Title className=''>Datos personales Actualizados:</Title>
@@ -21,7 +21,7 @@ export const PersonalData: React.FC<Props> = ({ personalData }) => (
             color='teal'
           >
             Pais: {toUpperCamelCase(personalData.country)}<br />
-            Ciudad: {toUpperCamelCase(personalData.cityCode)}<br />
+            Ciudad: {toUpperCamelCase(verifyCity(personalData.cityName, personalData.cityCode))}<br />
             Provincia: {toUpperCamelCase(personalData.province)}<br />
             Nacionalidad: {toUpperCamelCase(personalData.nationalities.join(' '))}<br />
             Telefono: {personalData.internationalPhone}<br />

@@ -10,7 +10,7 @@ interface Props {
 
 export const EducationList: React.FC<Props> = ({ educations }) => (
   <>
-    {educations !== null && Array.isArray(educations) && !isError(educations[0]) && (
+    {educations !== null && Array.isArray(educations) && educations.length > 0 && !isError(educations[0]) && (
       <div>
         <Title>Educacion añadidas:</Title>
         {educations.map((education: ResponseEducation, index) => (

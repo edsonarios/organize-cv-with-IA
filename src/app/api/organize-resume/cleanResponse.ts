@@ -1,5 +1,5 @@
 import { Education, Experience, PersonalData, responseIA } from '@/types/responseIA'
-import { getDictionary } from './request'
+import { getDictionary } from '../../services/request'
 import { Dictionary } from '@/types/infojobs/response'
 
 const DICTIONARY_COUNTRY = 'country'
@@ -208,12 +208,12 @@ const cleanEducation = async (education: Education) => {
   if (!datePattern.test(education.finishingDate)) {
     education.finishingDate = '1990-01-01'
   }
-  if (education.educationLevelCode === 'otros-titulos-certificaciones-y-carnes' && education.stillEnrolled) {
+  if (education.educationLevelCode === 'otros-titulos-certificaciones-y-carnes') {
     education.finishingDate = (education.startingDate !== '') ? education.startingDate : education.finishingDate
     education.startingDate = ''
     education.stillEnrolled = false
   }
-  if (education.stillEnrolled) {
+  if (education.stillEnrolled && education.educationLevelCode !== 'otros-titulos-certificaciones-y-carnes') {
     education.finishingDate = ''
   }
   return education

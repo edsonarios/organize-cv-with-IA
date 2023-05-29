@@ -10,7 +10,7 @@ interface Props {
 
 export const ExperienceList: React.FC<Props> = ({ experiences }) => (
   <>
-    {experiences !== null && Array.isArray(experiences) && !isError(experiences[0]) && (
+    {experiences !== null && Array.isArray(experiences) && experiences.length > 0 && !isError(experiences[0]) && (
       <div>
         {/* <Metric className=''>Experience</Metric> */}
         <Title className=''>Experiencia Laborar añadidas:</Title>

@@ -12,6 +12,16 @@ export function toUpperCamelCase (str: string) {
     .join(' ')
 }
 
+export function verifyCity (cityName: string | undefined, cityCode: string | undefined) {
+  if (cityName !== undefined) {
+    return cityName
+  }
+  if (cityCode !== undefined) {
+    return cityCode
+  }
+  return ''
+}
+
 export function manageDate (date: string) {
   if (date === undefined || date === '') return 'PRESENT'
   const newDate = new Date(date)

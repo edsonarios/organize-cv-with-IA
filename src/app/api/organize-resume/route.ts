@@ -5,7 +5,7 @@ import {
   OpenAIApi
 } from 'openai'
 import { cleanResponse } from './cleanResponse'
-import { madeRequests } from './request'
+import { makeRequests } from './makeRequests'
 
 const openaiToken = process.env.OPENAI_TOKEN ?? ''
 
@@ -175,10 +175,12 @@ export async function GET (request: Request) {
     // json = JSON.parse(data)
     // console.log('MANDANDO...')
     // console.log(json)
-    const json = await cleanResponse(fakeData)
+
+    const json = await cleanResponse(fakeData2)
     console.log(json)
-    const response = await madeRequests(json)
+    const response = await makeRequests(json)
     console.log(response)
+
     return NextResponse.json(response)
   } catch {
     return new Response('No se ha podido transformar el JSON', { status: 500 })
@@ -212,7 +214,7 @@ const fakeData = {
       onCourse: true,
       category: 'informatica-telecomunicaciones',
       subcategories: ['programacion'],
-      level: 'empleado-a123',
+      level: 'empleado-a',
       visible: true,
       expertise: [{ skill: 'Java' }, { skill: 'Spring Boot' }, { skill: 'Angular' }, { skill: 'MySQL' }]
     }, {
@@ -258,8 +260,91 @@ const fakeData = {
       courseCode: '',
       courseName: 'Desarrollo Full Stack',
       startingDate: '2018-01-01',
+      finishingDate: '2019-12-31',
+      stillEnrolled: false,
+      institutionName: 'Codecademy'
+    }
+
+  ]
+}
+
+const fakeData2 = {
+  personalData: {
+    name: 'Sergio',
+    surname1: 'Valdez',
+    surname2: 'Lozano',
+    country: 'bolivia',
+    province: 'bolivia',
+    cityName: 'Sucre',
+    zipCode: '',
+    preferredContactPhone: 'foreign-phone',
+    internationalPhone: '+59178784910',
+    driverLicenses: ['seleccionar'],
+    nationalities: ['bolivia'],
+    birthDay: '1990-01-01'
+  },
+  experience: [
+    {
+      id: '',
+      company: 'FASTECH',
+      job: 'Full Stack Developer',
+      description:
+        'En FASTECH, trabajo en la creación y mantenimiento de aplicaciones web y móviles, utilizando un stack de tecnologías modernas que incluye JavaScript, Node.js, React, Python y Django. También soy responsable de la integración y el mantenimiento de bases de datos en PostgreSQL y MongoDB.',
+      startingDate: '2018-04-01',
       finishingDate: '',
-      stillEnrolled: true,
+      onCourse: true,
+      category: 'informatica-telecomunicaciones',
+      subcategories: ['programacion'],
+      level: 'empleado-a',
+      visible: true,
+      expertise: [
+        { skill: 'JavaScript' }, { skill: 'Node.js' }, { skill: 'React' }, { skill: 'Python' }, { skill: 'Django' }
+      ]
+    }, {
+      id: '',
+      company: 'REDGATE',
+      job: 'Backend Developer',
+      description:
+        'En REDGATE, estuve a cargo del desarrollo del back-end de varias aplicaciones web, utilizando principalmente Node.js y Python. Fui responsable de la integración de las APIs, gestión de las bases de datos y seguridad de las aplicaciones.',
+      startingDate: '2015-03-01',
+      finishingDate: '2018-03-01',
+      onCourse: false,
+      category: 'informatica-telecomunicaciones',
+      subcategories: ['programacion'],
+      level: 'empleado-a',
+      visible: true,
+      expertise: [{ skill: 'Node.js' }, { skill: 'Python' }]
+    }
+
+  ],
+  education: [
+    {
+      id: '',
+      educationLevelCode: 'ingeniero-superior',
+      courseCode: 'i-sup-industrial',
+      courseName: '',
+      startingDate: '2010-01-01',
+      finishingDate: '2015-01-01',
+      stillEnrolled: false,
+      institutionName: 'Universidad Mayor de San Simón (UMSS)'
+    }, {
+      id: '',
+      educationLevelCode: 'postgrado',
+      courseCode: '',
+      courseName: 'M.Sc. in Software Engineering',
+      startingDate: '2018-01-01',
+      finishingDate: '2020-01-01',
+      stillEnrolled: false,
+      institutionName: 'Georgia Institute of Technology (Online Degree)'
+    },
+    {
+      id: '',
+      educationLevelCode: 'otros-titulos-certificaciones-y-carnes',
+      courseCode: '',
+      courseName: 'Full Stack Web Development Certificate',
+      startingDate: '2017-01-01',
+      finishingDate: '2018-01-01',
+      stillEnrolled: false,
       institutionName: 'Codecademy'
     }
 
