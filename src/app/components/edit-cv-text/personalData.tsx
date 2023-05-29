@@ -1,7 +1,7 @@
 import { Title, Callout } from '@tremor/react'
 import { CheckCircleIcon } from '@heroicons/react/solid'
 import { ErrorResponse, ResponsePersonalData } from '@/types/infojobs/response'
-import { isError, toUpperCamelCase, verifyCity } from '@/utils/utils'
+import { isError, toUpperCamelCase, verifyCity } from '@/app/utils/utils'
 
 interface Props {
   personalData: ResponsePersonalData | ErrorResponse

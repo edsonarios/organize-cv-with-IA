@@ -2,7 +2,7 @@
 import { Metric, Title, Callout } from '@tremor/react'
 import { CheckCircleIcon } from '@heroicons/react/solid'
 import { ErrorResponse, ResponseExperience } from '@/types/infojobs/response'
-import { isError, manageDate, toUpperCamelCase } from '@/utils/utils'
+import { isError, toUpperCamelCase, manageDate } from '@/app/utils/utils'
 
 interface Props {
   experiences: Array<ResponseExperience | ErrorResponse>
@@ -23,7 +23,7 @@ export const ExperienceList: React.FC<Props> = ({ experiences }) => (
               icon={CheckCircleIcon}
               color='teal'
             >
-              {manageDate(exp.startingDate)} — {manageDate(exp.finishingDate)}<br />
+              {manageDate(exp.startingDate, exp.finishingDate)}<br />
               <strong>Categoria:</strong> {toUpperCamelCase(exp.category)}<br />
               <strong>Descripcion:</strong> {exp.description}<br />
               <strong>Tecnologias:</strong> {toUpperCamelCase(exp.expertise.map(tec => tec.skill).join(' '))}<br />

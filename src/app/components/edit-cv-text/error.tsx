@@ -1,8 +1,8 @@
 // ExperienceList.tsx
-import { Metric, Title, Callout } from '@tremor/react'
+import { Title, Callout } from '@tremor/react'
 import { CheckCircleIcon } from '@heroicons/react/solid'
 import { UIErrorResponse } from '@/types/infojobs/response'
-import { toUpperCamelCase } from '@/utils/utils'
+import { toUpperCamelCase } from '@/app/utils/utils'
 
 interface Props {
   errors: UIErrorResponse[]

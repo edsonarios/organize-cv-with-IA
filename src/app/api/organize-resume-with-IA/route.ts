@@ -4,8 +4,6 @@ import {
   ChatCompletionRequestMessageRoleEnum,
   OpenAIApi
 } from 'openai'
-import { cleanResponse } from './cleanResponse'
-import { makeRequests } from './makeRequests'
 
 const openaiToken = process.env.OPENAI_TOKEN ?? ''
 
@@ -125,6 +123,7 @@ const INITIAL_MESSAGES = [
         ingeniero-superior:i-sup-aeronautico,agronomo,arquitecto,geologo,i-sup-industrial,ingeniero-de-caminos-canales-y-puertos,ingeniero-de-materiales,ingeniero-de-minas,ingeniero-de-montes,ingeniero-de-sistemas-de-defensa,ingeniero-de-telecomunicacion,ingeniero-en-automatica-y-electronica-industrial,ingeniero-en-electronica,ingeniero-en-geodesia-y-cartografia,ingeniero-en-informatica,ingeniero-en-organizacion-industrial,naval-y-oceanico,quimico
     
     IMPORTANTE para el campo de "courseCode": si el campo de "educationLevelCode" fuera alguna de las siguientes opciones "postgrado,master,otros-titulos-certificaciones-y-carnes,otros-cursos-y-formacion-no-reglada", entonces dejar vacio el campo de "courseCode"
+    IMPORTANTE no mezclar las opciones de ninguna manera, es estricto cada opcion acorde a la educacion
     
     - En el campo de courseName, si el campo de "educationLevelCode" es alguna de las siguientes opciones "postgrado,master,otros-titulos-certificaciones-y-carnes,otros-cursos-y-formacion-no-reglada", entonces recien añadir el nombre del curso de la educacion, sino es ninguna de las opciones dejar el campo vacio
     
@@ -147,41 +146,34 @@ const INITIAL_MESSAGES = [
 ]
 
 export async function GET (request: Request) {
-  // const { searchParams } = new URL(request.url)
-  // let cv = ''
-  // if (searchParams.has('cv')) {
-  //   const cvParam = searchParams.get('cv')
-  //   if (cvParam !== null) {
-  //     cv = decodeURIComponent(cvParam)
-  //   }
-  // }
+  const { searchParams } = new URL(request.url)
+  let cv = ''
+  if (searchParams.has('cv')) {
+    const cvParam = searchParams.get('cv')
+    if (cvParam !== null) {
+      cv = decodeURIComponent(cvParam)
+    }
+  }
 
-  // const completion = await openai.createChatCompletion({
-  //   model: 'gpt-3.5-turbo',
-  //   temperature: 0,
-  //   messages: [
-  //     ...INITIAL_MESSAGES,
-  //     {
-  //       role: ChatCompletionRequestMessageRoleEnum.User,
-  //       content: cv
-  //     }
-  //   ]
-  // })
-  // const data = completion.data.choices[0].message?.content ?? ''
-  // let json
+  const completion = await openai.createChatCompletion({
+    model: 'gpt-3.5-turbo',
+    temperature: 0,
+    messages: [
+      ...INITIAL_MESSAGES,
+      {
+        role: ChatCompletionRequestMessageRoleEnum.User,
+        content: cv
+      }
+    ]
+  })
+  const data = completion.data.choices[0].message?.content ?? ''
+  let json
 
   try {
-    // console.log(data)
-    // json = JSON.parse(data)
-    // console.log('MANDANDO...')
-    // console.log(json)
-
-    const json = await cleanResponse(fakeData2)
+    console.log(data)
+    json = JSON.parse(data)
     console.log(json)
-    const response = await makeRequests(json)
-    console.log(response)
-
-    return NextResponse.json(response)
+    return NextResponse.json(json)
   } catch {
     return new Response('No se ha podido transformar el JSON', { status: 500 })
   }
@@ -268,84 +260,85 @@ const fakeData = {
   ]
 }
 
-const fakeData2 = {
+const fakeData3 = {
   personalData: {
-    name: 'Sergio',
-    surname1: 'Valdez',
-    surname2: 'Lozano',
-    country: 'bolivia',
-    province: 'bolivia',
-    cityName: 'Sucre',
+    name: 'Maximilian',
+    surname1: 'Schulz',
+    surname2: '',
+    country: 'alemania',
+    province: 'berlin',
+    cityName: 'berlin',
     zipCode: '',
     preferredContactPhone: 'foreign-phone',
-    internationalPhone: '+59178784910',
+    internationalPhone: '+49 176 849 0042',
     driverLicenses: ['seleccionar'],
-    nationalities: ['bolivia'],
+    nationalities: ['alemania'],
     birthDay: '1990-01-01'
   },
   experience: [
     {
       id: '',
-      company: 'FASTECH',
-      job: 'Full Stack Developer',
+      company: 'BLUECHIP SOFTWARE',
+      job: 'Software Engineer',
       description:
-        'En FASTECH, trabajo en la creación y mantenimiento de aplicaciones web y móviles, utilizando un stack de tecnologías modernas que incluye JavaScript, Node.js, React, Python y Django. También soy responsable de la integración y el mantenimiento de bases de datos en PostgreSQL y MongoDB.',
-      startingDate: '2018-04-01',
+        'Creating and maintaining high-performance web applications using C#, .NET, Azure, and SQL Server. Implementing new features, maintaining existing code, and debugging issues.',
+      startingDate: '2022-01-01',
       finishingDate: '',
       onCourse: true,
       category: 'informatica-telecomunicaciones',
       subcategories: ['programacion'],
       level: 'empleado-a',
       visible: true,
-      expertise: [
-        { skill: 'JavaScript' }, { skill: 'Node.js' }, { skill: 'React' }, { skill: 'Python' }, { skill: 'Django' }
-      ]
+      expertise: [{ skill: 'C#' }, { skill: '.NET' }, { skill: 'Azure' }, { skill: 'SQL Server' }]
     }, {
       id: '',
-      company: 'REDGATE',
+      company: 'TECHNOLOGIC SOLUTIONS',
       job: 'Backend Developer',
       description:
-        'En REDGATE, estuve a cargo del desarrollo del back-end de varias aplicaciones web, utilizando principalmente Node.js y Python. Fui responsable de la integración de las APIs, gestión de las bases de datos y seguridad de las aplicaciones.',
-      startingDate: '2015-03-01',
-      finishingDate: '2018-03-01',
+        'In charge of backend development for several web and mobile applications, using C# and .NET. Creating RESTful APIs, managing SQL Server databases, and implementing security solutions.',
+      startingDate: '2014-09-01',
+      finishingDate: '2021-12-31',
       onCourse: false,
       category: 'informatica-telecomunicaciones',
       subcategories: ['programacion'],
       level: 'empleado-a',
       visible: true,
-      expertise: [{ skill: 'Node.js' }, { skill: 'Python' }]
+      expertise: [
+        { skill: 'C#' }, { skill: '.NET' }, { skill: 'RESTful APIs' }, { skill: 'SQL Server' }, { skill: 'Security Solutions' }
+
+      ]
     }
 
   ],
   education: [
     {
       id: '',
-      educationLevelCode: 'ingeniero-superior',
-      courseCode: 'i-sup-industrial',
+      educationLevelCode: 'licenciado',
+      courseCode: 'lic-informatica',
       courseName: '',
-      startingDate: '2010-01-01',
-      finishingDate: '2015-01-01',
+      startingDate: '2010-09-01',
+      finishingDate: '2014-07-31',
       stillEnrolled: false,
-      institutionName: 'Universidad Mayor de San Simón (UMSS)'
+      institutionName: 'Technical University of Munich'
     }, {
       id: '',
-      educationLevelCode: 'postgrado',
-      courseCode: '',
-      courseName: 'M.Sc. in Software Engineering',
-      startingDate: '2018-01-01',
-      finishingDate: '2020-01-01',
+      educationLevelCode: 'master',
+      courseCode: 'msc-software-engineering',
+      courseName: '',
+      startingDate: '2015-09-01',
+      finishingDate: '2017-07-31',
       stillEnrolled: false,
-      institutionName: 'Georgia Institute of Technology (Online Degree)'
+      institutionName: 'Technical University of Berlin'
     },
     {
       id: '',
       educationLevelCode: 'otros-titulos-certificaciones-y-carnes',
       courseCode: '',
-      courseName: 'Full Stack Web Development Certificate',
-      startingDate: '2017-01-01',
-      finishingDate: '2018-01-01',
-      stillEnrolled: false,
-      institutionName: 'Codecademy'
+      courseName: 'Microsoft Certified: Azure Developer Associate',
+      startingDate: '2018-01-01',
+      finishingDate: '',
+      stillEnrolled: true,
+      institutionName: ''
     }
 
   ]

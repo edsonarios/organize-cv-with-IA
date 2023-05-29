@@ -1,8 +1,6 @@
-import { Grid, Col, Metric, Card, Text, Title, Button } from '@tremor/react'
-import { PlusCircle } from './components/icons/plus-circle'
-import CardRight from './components/card-right/card-right'
-import CardLeft from './components/card-right/card-left'
 import { EditCvText } from './components/edit-cv-text/edit-cv-text'
+import { GlobalError } from './components/errors/errors'
+import 'react-toastify/dist/ReactToastify.css'
 
 export default function Home () {
   return (

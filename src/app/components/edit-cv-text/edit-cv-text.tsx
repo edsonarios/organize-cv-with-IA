@@ -6,6 +6,9 @@ import { ExperienceList } from './experience'
 import { EducationList } from './education'
 import { PersonalData } from './personalData'
 import { ErrorList } from './error'
+import { useStore } from '@/app/store/store'
+import { Snackbar, Alert, AlertColor, SnackbarCloseReason } from '@mui/material'
+import { ErrorSnackbar } from '../errors/errors'
 
 export function EditCvText () {
   const [loadingGuardar, setLoadingGuardar] = useState(false)
@@ -13,7 +16,11 @@ export function EditCvText () {
   const [textAreavalue, setTextAreaValue] = useState('')
   const [iaData, setIaData] = useState<ResponseRequest | null>(null)
   const elementoRef = useRef<HTMLDivElement>(null)
-  const [toggleValue, setToggleValue] = useState('off')
+  const [toggleValue, setToggleValue] = useState('No')
+  const loadingText = useStore(state => state.loadingText)
+  const setLoadingText = useStore(state => state.setLoadingText)
+  const setError = useStore((state) => state.setError)
+  const error = useStore((state) => state.error)
 
   const handleChange = (event) => {
     setTextAreaValue(event.target.value)
@@ -54,144 +61,167 @@ export function EditCvText () {
     setLoadingIA(true)
     setIaData(null)
     console.log(toggleValue)
-    if (toggleValue === 'on') {
-      await fetch('/api/clean-resume/', {
-        headers: {
-          'Content-Type': 'application/json'
+    if (toggleValue === 'Si') {
+      setLoadingText('Limpiando CV...')
+      try {
+        const response = await fetch('/api/clean-resume/', {
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        })
+        console.log(response)
+        if (response.status === 500) {
+          console.log('ser error')
+          setError({
+            error: true,
+            description: response.statusText
+          })
         }
-      })
+        const json = await response.json()
+        console.log(json)
+      } catch (error) {
+        console.log('Error: ', error)
+      }
     }
 
+    // setLoadingText('Analizando con IA...')
+    setLoadingText('Organizando CV con IA...')
     const encodedCv = encodeURIComponent(cv)
-    const response = await fetch(`/api/organize-resume/?cv=${encodedCv}`, {
+    const response = await fetch(`/api/organize-resume-with-IA/?cv=${encodedCv}`, {
       headers: {
         'Content-Type': 'application/json'
       }
     })
+
     console.log(response)
-    const json = await response.json() as ResponseRequest
+    const json = await response.json()
     console.log(json)
-    setIaData(json)
+
+    setLoadingText('Guardando CV...')
+    const saveCV = await fetch('/api/save-resume/', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(json)
+    })
+    setLoadingText('Mostrando respuesta...')
+    console.log(saveCV)
+    const json2 = await saveCV.json()
+    console.log(json2)
+
+    setIaData(json2)
     setLoadingIA(false)
   }
 
   const prueba = () => {
     console.log('prueba')
     const dataFromIA: ResponseRequest =
-      {
-        personalData: {
-          name: 'Juan',
-          surname1: 'Martínez',
-          surname2: 'Morales',
-          nationalIdentityCardType: 'nif',
-          nationalIdentityCard: '',
-          birthDay: '1990-01-01T00:00:00.000Z',
-          country: 'espana',
-          province: 'madrid',
-          cityCode: 'madrid',
-          zipCode: '10000',
-          preferredContactPhone: 'foreign-phone',
-          internationalPhone: '+34 625 849 002',
-          driverLicenses: ['seleccionar'],
-          vehicleOwner: false,
-          freelance: false,
-          nationalities: ['espana'],
-          email: 'edsonrios9@gmail.com',
-          segment: 'White-Non-Specialist'
-        },
-        experience: [
-          {
-            id: '34230566438',
-            company: 'BYTEWISE',
-            job: 'Desarrollador Full Stack',
-            description:
-              'Creación y mantenimiento de aplicaciones web de alto rendimiento, usando Java, Spring Boot, Angular y MySQL. Implementación de nuevas funcionalidades, mantenimiento del código existente y resolución de errores.',
-            startingDate: '2021-06-01T00:00:00.000Z',
-            onCourse: true,
-            category: 'informatica-telecomunicaciones',
-            subcategories: ['programacion'],
-            industry: 'seleccionar',
-            level: 'seleccionar',
-            staff: '0',
-            salaryMin: 'seleccionar',
-            salaryMax: 'seleccionar',
-            hideSalary: false,
-            visible: true,
-            reportingTo: 'seleccionar',
-            expertise: [{ skill: 'Java' }, { skill: 'MySQL' }, { skill: 'Spring Boot' }, { skill: 'Angular' }]
-          }, {
-            id: '34230566439',
-            company: 'TECHINNOVATIONS',
-            job: 'Desarrollador Back End',
-            description:
-              'Desarrollo del back-end de varias aplicaciones web y móviles, utilizando Java y Spring Boot. Creación de APIs RESTful, gestión de bases de datos MySQL e implementación de soluciones de seguridad.',
-            startingDate: '2015-01-01T00:00:00.000Z',
-            finishingDate: '2021-05-01T00:00:00.000Z',
-            onCourse: false,
-            category: 'informatica-telecomunicaciones',
-            subcategories: ['programacion'],
-            industry: 'seleccionar',
-            level: 'empleado-a',
-            staff: '0',
-            salaryMin: 'seleccionar',
-            salaryMax: 'seleccionar',
-            hideSalary: false,
-            visible: true,
-            reportingTo: 'seleccionar',
-            expertise: [{ skill: 'Java' }, { skill: 'MySQL' }, { skill: 'Spring Boot' }]
-          }
+    {
+      personalData: {
+        name: 'Maximilian',
+        surname1: 'Schulz',
+        surname2: '',
+        nationalIdentityCardType: 'nif',
+        nationalIdentityCard: '',
+        birthDay: '1990-01-01T00:00:00.000Z',
+        country: 'alemania',
+        province: 'berlin',
+        cityName: 'berlin',
+        preferredContactPhone: 'foreign-phone',
+        internationalPhone: '+49 176 849 0042',
+        driverLicenses: ['seleccionar'],
+        vehicleOwner: false,
+        freelance: false,
+        nationalities: ['alemania'],
+        email: 'edsonrios9@gmail.com',
+        segment: 'White-Specialist'
+      },
+      experience: [
+        {
+          id: '34230610308',
+          company: 'BLUECHIP SOFTWARE',
+          job: 'Software Engineer',
+          description:
+            'Creating and maintaining high-performance web applications using C#, .NET, Azure, and SQL Server. Implementing new features, maintaining existing code, and debugging issues.',
+          startingDate: '2022-01-01T00:00:00.000Z',
+          onCourse: true,
+          category: 'informatica-telecomunicaciones',
+          subcategories: ['programacion'],
+          industry: 'seleccionar',
+          level: 'empleado-a',
+          staff: '0',
+          salaryMin: 'seleccionar',
+          salaryMax: 'seleccionar',
+          hideSalary: false,
+          visible: true,
+          reportingTo: 'seleccionar',
+          expertise: [{ skill: '.NET' }, { skill: 'Azure' }, { skill: 'C#' }, { skill: 'SQL Server' }]
+        }, {
+          id: '34230610310',
+          company: 'TECHNOLOGIC SOLUTIONS',
+          job: 'Backend Developer',
+          description:
+            'In charge of backend development for several web and mobile applications, using C# and .NET. Creating RESTful APIs, managing SQL Server databases, and implementing security solutions.',
+          startingDate: '2014-09-01T00:00:00.000Z',
+          finishingDate: '2021-12-31T00:00:00.000Z',
+          onCourse: false,
+          category: 'informatica-telecomunicaciones',
+          subcategories: ['programacion'],
+          industry: 'seleccionar',
+          level: 'empleado-a',
+          staff: '0',
+          salaryMin: 'seleccionar',
+          salaryMax: 'seleccionar',
+          hideSalary: false,
+          visible: true,
+          reportingTo: 'seleccionar',
+          expertise: [
+            { skill: '.NET' }, { skill: 'RESTful APIs' }, { skill: 'C#' }, { skill: 'Security Solutions' }, { skill: 'SQL Server' }
 
-        ],
-        education: [
-          {
-            id: 48205171786,
-            educationLevelCode: 'ingeniero-superior',
-            courseCode: 'i-sup-industrial',
-            startingDate: '2010-09-01T00:00:00.000Z',
-            finishingDate: '2014-06-01T00:00:00.000Z',
-            stillEnrolled: false,
-            institutionName: 'Universidad Politécnica de Madrid',
-            hideEducation: false
-          }, {
-            id: 48205171788,
-            educationLevelCode: 'master',
-            courseName: 'Ingeniería del Software, Sistemas Informáticos y Computación',
-            startingDate: '2015-09-01T00:00:00.000Z',
-            finishingDate: '2017-06-01T00:00:00.000Z',
-            stillEnrolled: false,
-            institutionName: 'Universidad Politécnica de Madrid',
-            hideEducation: false
-          },
-          {
-            id: 48205171876,
-            educationLevelCode: 'otros-titulos-certificaciones-y-carnes',
-            courseName: 'Desarrollo Full Stack',
-            finishingDate: '2018-01-01T00:00:00.000Z',
-            stillEnrolled: false,
-            institutionName: 'Codecademy',
-            hideEducation: false
-          }
+          ]
+        }
 
-        ],
-        UIErrorResponse: [
-          {
-            type: 'education',
-            errorCode: '602',
-            error_description: 'The value of educationLevelCode provided: otros-titulos-certificaciones-y-carnes123 is not valid.',
-            body: {
-              courseCode: 'i-sip-industrial',
-              educationLevelCode: 'ingeniero-superior'
-            }
-          }, {
-            type: 'experience',
-            errorCode: '554',
-            error_description: 'The value of educationLevelCode provided: otros-titulos-certificaciones-y-carnes123 is not valid.',
-            body: {
-              job: 'Desarrollador Full Stack',
-              company: 'BYTEWISE'
-            }
-          }]
-      }
+      ],
+      education: [
+        {
+          id: 48228282678,
+          educationLevelCode: 'master',
+          courseName: 'Technical University of Berlin',
+          startingDate: '2015-09-01T00:00:00.000Z',
+          finishingDate: '2017-07-31T00:00:00.000Z',
+          stillEnrolled: false,
+          institutionName: 'Technical University of Berlin',
+          hideEducation: false
+        }, {
+          id: 48228282686,
+          educationLevelCode: 'otros-titulos-certificaciones-y-carnes',
+          courseName: 'Microsoft Certified: Azure Developer Associate',
+          finishingDate: '2018-01-01T00:00:00.000Z',
+          stillEnrolled: false,
+          hideEducation: false
+        }
+
+      ],
+      UIErrorResponse: [
+        {
+          type: 'Educacion',
+          errorCode: '609',
+          error_description:
+            'The course name provided for the educationLevelCode: otros-cursos-y-formacion-no-reglada is invalid',
+          body: {
+            id: '',
+            educationLevelCode: 'otros-cursos-y-formacion-no-reglada',
+            courseCode: '',
+            courseName: '',
+            startingDate: '2010-09-01',
+            finishingDate: '2014-07-31',
+            stillEnrolled: false,
+            institutionName: 'Technical University of Munich'
+          }
+        }
+      ]
+    }
 
     const dataFromIA2: ResponseRequest = {
       personalData: {
@@ -299,22 +329,20 @@ export function EditCvText () {
         }
       ]
     }
-    console.log(dataFromIA2)
-    setIaData(dataFromIA2)
+    console.log(dataFromIA)
+    setIaData(dataFromIA)
   }
   const prueba2 = async () => {
-    // setIaData(null)
-    await fetch('/api/clean-resume/', {
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    })
+    setIaData(null)
+    // await fetch('/api/clean-resume/', {
+    //   headers: {
+    //     'Content-Type': 'application/json'
+    //   }
+    // })
   }
 
   return (
-  // <div className='flex'>
     <>
-
       <div className='max-w-full flex flex-col'>
         <Card className='max-w-4xl mx-auto flex flex-col'>
           <Title className='mx-auto text-center'>Editar CV en texto</Title>
@@ -348,7 +376,7 @@ export function EditCvText () {
               size='sm' variant='secondary' className='mt-8 flex-grow mr-2'
               disabled={loadingIA}
               loading={loadingIA}
-              loadingText='Analizando con IA'
+              loadingText={loadingText}
               onClick={async (event) => {
                 event.stopPropagation()
                 await SaveCvWithIA(textAreavalue)
@@ -359,12 +387,12 @@ export function EditCvText () {
               <Title>Reemplazar todo CV?</Title>
               <Toggle
                 color='zinc'
-                defaultValue='off'
+                defaultValue='No'
                 value={toggleValue}
                 onValueChange={setToggleValue}
               >
-                <ToggleItem value='off' text='Off' />
-                <ToggleItem value='on' text='On' />
+                <ToggleItem value='No' text='No' />
+                <ToggleItem value='Si' text='Si' />
               </Toggle>
             </div>
           </div>
@@ -395,7 +423,7 @@ export function EditCvText () {
           </Card>
         )}
       </div>
-
+      <ErrorSnackbar />
     </>
   )
 }

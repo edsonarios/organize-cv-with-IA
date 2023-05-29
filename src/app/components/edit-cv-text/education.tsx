@@ -2,7 +2,7 @@
 import { Metric, Title, Callout } from '@tremor/react'
 import { CheckCircleIcon } from '@heroicons/react/solid'
 import { ErrorResponse, ResponseEducation } from '@/types/infojobs/response'
-import { isError, manageDate, toUpperCamelCase } from '@/utils/utils'
+import { isError, manageDate, toUpperCamelCase } from '@/app/utils/utils'
 
 interface Props {
   educations: Array<ResponseEducation | ErrorResponse>
@@ -21,7 +21,7 @@ export const EducationList: React.FC<Props> = ({ educations }) => (
               icon={CheckCircleIcon}
               color='teal'
             >
-              {manageDate(education.startingDate)} — {manageDate(education.finishingDate)}<br />
+              {manageDate(education.startingDate, education.finishingDate)}<br />
               <strong>Institucion:</strong> {toUpperCamelCase(education.institutionName)}<br />
             </Callout>
           </div>
