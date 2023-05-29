@@ -1,5 +1,4 @@
-// ExperienceList.tsx
-import { Metric, Title, Callout } from '@tremor/react'
+import { Title, Callout } from '@tremor/react'
 import { CheckCircleIcon } from '@heroicons/react/solid'
 import { ErrorResponse, ResponseEducation } from '@/types/infojobs/response'
 import { isError, manageDate, toUpperCamelCase } from '@/app/utils/utils'
@@ -17,12 +16,18 @@ export const EducationList: React.FC<Props> = ({ educations }) => (
           <div key={index} className='p-2'>
             <Callout
               className='mt-1'
+              // @ts-expect-error
               title={toUpperCamelCase(education.educationLevelCode)}
               icon={CheckCircleIcon}
               color='teal'
             >
-              {manageDate(education.startingDate, education.finishingDate)}<br />
-              <strong>Institucion:</strong> {toUpperCamelCase(education.institutionName)}<br />
+
+              {// @ts-expect-error
+              manageDate(education.startingDate, education.finishingDate)
+              }<br />
+              <strong>Institucion:</strong> {// @ts-expect-error
+              toUpperCamelCase(education.institutionName)
+              }<br />
             </Callout>
           </div>
         ))}

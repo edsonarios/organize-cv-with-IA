@@ -6,6 +6,20 @@ const infoJobsToken = process.env.INFOJOBS_TOKEN ?? ''
 const INFOJOBS_API = 'https://api.infojobs.net/api/'
 const CURRICULUM_ID = 'd1e4835e-bf61-4d26-8785-5ac4833ec415'
 
+export async function putCVText () {
+  const response = await fetch('https://api.infojobs.net/api/7/offer?category=informatica-telecomunicaciones', {
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Basic ${infoJobsToken}`
+    }
+  })
+  // const res = await PUT(cv)
+  const json = await response.json()
+  console.log(json)
+
+  return json
+}
+
 export async function putPersonalData (personalData: PersonalData) {
   console.log(personalData)
 

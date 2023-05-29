@@ -22,7 +22,7 @@ export async function PUT (request: Request) {
   })
   const data = await response.json()
   console.log(data)
-  if (data.error) {
+  if (data.error !== null) {
     console.log('error')
     console.log(data)
     const errorMessage = data.error_description

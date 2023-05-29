@@ -7,7 +7,6 @@ import { EducationList } from './education'
 import { PersonalData } from './personalData'
 import { ErrorList } from './error'
 import { useStore } from '@/app/store/store'
-import { Snackbar, Alert, AlertColor, SnackbarCloseReason } from '@mui/material'
 import { ErrorSnackbar } from '../errors/errors'
 
 export function EditCvText () {
@@ -20,9 +19,8 @@ export function EditCvText () {
   const loadingText = useStore(state => state.loadingText)
   const setLoadingText = useStore(state => state.setLoadingText)
   const setError = useStore((state) => state.setError)
-  const error = useStore((state) => state.error)
 
-  const handleChange = (event) => {
+  const handleChange = (event: any) => {
     setTextAreaValue(event.target.value)
   }
 
@@ -116,114 +114,8 @@ export function EditCvText () {
 
   const prueba = () => {
     console.log('prueba')
-    const dataFromIA: ResponseRequest =
-    {
-      personalData: {
-        name: 'Maximilian',
-        surname1: 'Schulz',
-        surname2: '',
-        nationalIdentityCardType: 'nif',
-        nationalIdentityCard: '',
-        birthDay: '1990-01-01T00:00:00.000Z',
-        country: 'alemania',
-        province: 'berlin',
-        cityName: 'berlin',
-        preferredContactPhone: 'foreign-phone',
-        internationalPhone: '+49 176 849 0042',
-        driverLicenses: ['seleccionar'],
-        vehicleOwner: false,
-        freelance: false,
-        nationalities: ['alemania'],
-        email: 'edsonrios9@gmail.com',
-        segment: 'White-Specialist'
-      },
-      experience: [
-        {
-          id: '34230610308',
-          company: 'BLUECHIP SOFTWARE',
-          job: 'Software Engineer',
-          description:
-            'Creating and maintaining high-performance web applications using C#, .NET, Azure, and SQL Server. Implementing new features, maintaining existing code, and debugging issues.',
-          startingDate: '2022-01-01T00:00:00.000Z',
-          onCourse: true,
-          category: 'informatica-telecomunicaciones',
-          subcategories: ['programacion'],
-          industry: 'seleccionar',
-          level: 'empleado-a',
-          staff: '0',
-          salaryMin: 'seleccionar',
-          salaryMax: 'seleccionar',
-          hideSalary: false,
-          visible: true,
-          reportingTo: 'seleccionar',
-          expertise: [{ skill: '.NET' }, { skill: 'Azure' }, { skill: 'C#' }, { skill: 'SQL Server' }]
-        }, {
-          id: '34230610310',
-          company: 'TECHNOLOGIC SOLUTIONS',
-          job: 'Backend Developer',
-          description:
-            'In charge of backend development for several web and mobile applications, using C# and .NET. Creating RESTful APIs, managing SQL Server databases, and implementing security solutions.',
-          startingDate: '2014-09-01T00:00:00.000Z',
-          finishingDate: '2021-12-31T00:00:00.000Z',
-          onCourse: false,
-          category: 'informatica-telecomunicaciones',
-          subcategories: ['programacion'],
-          industry: 'seleccionar',
-          level: 'empleado-a',
-          staff: '0',
-          salaryMin: 'seleccionar',
-          salaryMax: 'seleccionar',
-          hideSalary: false,
-          visible: true,
-          reportingTo: 'seleccionar',
-          expertise: [
-            { skill: '.NET' }, { skill: 'RESTful APIs' }, { skill: 'C#' }, { skill: 'Security Solutions' }, { skill: 'SQL Server' }
 
-          ]
-        }
-
-      ],
-      education: [
-        {
-          id: 48228282678,
-          educationLevelCode: 'master',
-          courseName: 'Technical University of Berlin',
-          startingDate: '2015-09-01T00:00:00.000Z',
-          finishingDate: '2017-07-31T00:00:00.000Z',
-          stillEnrolled: false,
-          institutionName: 'Technical University of Berlin',
-          hideEducation: false
-        }, {
-          id: 48228282686,
-          educationLevelCode: 'otros-titulos-certificaciones-y-carnes',
-          courseName: 'Microsoft Certified: Azure Developer Associate',
-          finishingDate: '2018-01-01T00:00:00.000Z',
-          stillEnrolled: false,
-          hideEducation: false
-        }
-
-      ],
-      UIErrorResponse: [
-        {
-          type: 'Educacion',
-          errorCode: '609',
-          error_description:
-            'The course name provided for the educationLevelCode: otros-cursos-y-formacion-no-reglada is invalid',
-          body: {
-            id: '',
-            educationLevelCode: 'otros-cursos-y-formacion-no-reglada',
-            courseCode: '',
-            courseName: '',
-            startingDate: '2010-09-01',
-            finishingDate: '2014-07-31',
-            stillEnrolled: false,
-            institutionName: 'Technical University of Munich'
-          }
-        }
-      ]
-    }
-
-    const dataFromIA2: ResponseRequest = {
+    const dataFromIA: ResponseRequest = {
       personalData: {
         name: 'Sergio',
         surname1: 'Valdez',

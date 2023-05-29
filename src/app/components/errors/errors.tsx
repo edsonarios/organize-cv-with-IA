@@ -17,6 +17,7 @@ export const ErrorSnackbar = () => {
     <Snackbar
       open={error.error}
       autoHideDuration={6000}
+      // @ts-expect-error
       onClose={handleCloseSnackbar}
       anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
     >

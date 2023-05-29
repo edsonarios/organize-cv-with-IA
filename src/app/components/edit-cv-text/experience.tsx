@@ -1,5 +1,5 @@
 // ExperienceList.tsx
-import { Metric, Title, Callout } from '@tremor/react'
+import { Title, Callout } from '@tremor/react'
 import { CheckCircleIcon } from '@heroicons/react/solid'
 import { ErrorResponse, ResponseExperience } from '@/types/infojobs/response'
 import { isError, toUpperCamelCase, manageDate } from '@/app/utils/utils'
@@ -16,17 +16,25 @@ export const ExperienceList: React.FC<Props> = ({ experiences }) => (
         <Title className=''>Experiencia Laborar añadidas:</Title>
         {experiences.map((exp: ResponseExperience, index) => (
           <div key={index} className='p-2'>
-            {/* <Title>{exp.company}</Title> */}
             <Callout
               className='mt-1'
+              // @ts-expect-error
               title={exp.job + ' — ' + exp.company}
               icon={CheckCircleIcon}
               color='teal'
             >
-              {manageDate(exp.startingDate, exp.finishingDate)}<br />
-              <strong>Categoria:</strong> {toUpperCamelCase(exp.category)}<br />
-              <strong>Descripcion:</strong> {exp.description}<br />
-              <strong>Tecnologias:</strong> {toUpperCamelCase(exp.expertise.map(tec => tec.skill).join(' '))}<br />
+              {// @ts-expect-error
+              manageDate(exp.startingDate, exp.finishingDate)
+              }<br />
+              <strong>Categoria:</strong> {// @ts-expect-error
+              toUpperCamelCase(exp.category)
+              }<br />
+              <strong>Descripcion:</strong> {// @ts-expect-error
+              exp.description
+              }<br />
+              <strong>Tecnologias:</strong> {// @ts-expect-error
+              toUpperCamelCase(exp.expertise.map(tec => tec.skill).join(' '))
+              }<br />
             </Callout>
           </div>
         ))}
