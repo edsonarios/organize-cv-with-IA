@@ -104,6 +104,7 @@ const INITIAL_MESSAGES = [
             ]
         }
     ]
+      IMPORTANTE: subcategories, no hacer combinaciones, mantener estricto el nombre
 
     SECCION "education"
     Armar y llenar un JSON con los datos segun corresponda, pero solo modificaras los campos de: "educationLevelCode", "courseCode","startingDate","finishingDate","stillEnrolled","institutionName"

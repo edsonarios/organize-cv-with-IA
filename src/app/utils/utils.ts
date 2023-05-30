@@ -23,9 +23,18 @@ export function verifyCity (cityName: string | undefined, cityCode: string | und
   return ''
 }
 
+export function verifyCourseName (courseCode: string | undefined, courseName: string | undefined) {
+  if (courseCode !== undefined) {
+    return courseCode
+  }
+  if (courseName !== undefined) {
+    return courseName
+  }
+  return ''
+}
+
 export function manageDate (dateStart: string, dateEnd: string) {
   const options: Intl.DateTimeFormatOptions = { year: 'numeric', month: 'long', day: 'numeric' }
-  console.log(dateStart, dateEnd)
   if (dateStart === undefined && dateEnd === undefined) return ''
   if ((dateStart !== '' || dateStart !== undefined) && (dateEnd === undefined || dateEnd === '')) {
     return `${new Date(dateStart).toLocaleDateString(undefined, options)} — PRESENT`

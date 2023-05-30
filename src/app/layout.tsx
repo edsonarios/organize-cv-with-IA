@@ -20,8 +20,14 @@ export default function RootLayout ({
         <header className='py-10'>
           <h1 className='flex flex-col items-center justify-center text-lg'>
             <Logo />
-            <strong className='font-semibold tracking-wider text-black/80'>Añadir Experiencia Laboral Automaticamente</strong>
+            <strong className='font-semibold tracking-wider text-black/80'>Organizar tu CV con ayuda de la IA</strong><br />
           </h1>
+          <h5 className='flex flex-col items-center justify-center text-base'>
+            Actualiza Datos personales, Añade tus Experiencias laborales y Añade los estudios que tengas
+          </h5>
+          <h5 className='flex flex-col items-center justify-center text-base'>
+            Solo copia todo tu CV en el cuadro de texto y deja que la IA haga su magia
+          </h5>
         </header>
 
         {children}
