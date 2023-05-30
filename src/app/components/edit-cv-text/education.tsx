@@ -1,7 +1,7 @@
 import { Title, Callout } from '@tremor/react'
 import { CheckCircleIcon } from '@heroicons/react/solid'
 import { ErrorResponse, ResponseEducation } from '@/types/infojobs/response'
-import { isError, manageDate, toUpperCamelCase } from '@/app/utils/utils'
+import { isError, manageDate, toUpperCamelCase, verifyCourseName } from '@/app/utils/utils'
 
 interface Props {
   educations: Array<ResponseEducation | ErrorResponse>
@@ -27,6 +27,9 @@ export const EducationList: React.FC<Props> = ({ educations }) => (
               }<br />
               <strong>Institucion:</strong> {// @ts-expect-error
               toUpperCamelCase(education.institutionName)
+              }<br />
+              <strong>Estudio:</strong> {// @ts-expect-error
+              toUpperCamelCase(verifyCourseName(education.courseCode, education.courseName))
               }<br />
             </Callout>
           </div>

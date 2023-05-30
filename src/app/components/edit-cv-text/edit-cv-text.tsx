@@ -67,6 +67,7 @@ export function EditCvText () {
             'Content-Type': 'application/json'
           }
         })
+        console.log('CLEAN CV')
         console.log(response)
         if (response.status === 500) {
           console.log('ser error')
@@ -90,7 +91,7 @@ export function EditCvText () {
         'Content-Type': 'application/json'
       }
     })
-
+    console.log('ORGANIZED IA')
     console.log(response)
     const json = await response.json()
     console.log(json)
@@ -104,6 +105,7 @@ export function EditCvText () {
       body: JSON.stringify(json)
     })
     setLoadingText('Mostrando respuesta...')
+    console.log('SAVE CV')
     console.log(saveCV)
     const json2 = await saveCV.json()
     console.log(json2)
