@@ -27,6 +27,9 @@ export default function RootLayout ({
           </h5>
           <h5 className='flex flex-col items-center justify-center text-base'>
             Solo copia todo tu CV en el cuadro de texto y deja que la IA haga su magia
+          </h5><br />
+          <h5 className='flex flex-col items-center justify-center text-base text-green-500'>
+            HABILITADO PARA PRUEBAS
           </h5>
         </header>
 

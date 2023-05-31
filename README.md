@@ -7,6 +7,8 @@
 
 Para fines de prueba, las variables de entorno estaran desactivados, y solo se activara el dia de las votacions en el canal de Midudev, eso para evitar costos exorbitantes en ChatGPT
 
+Se mencionara en la pagina si esta habilitado para pruebas
+
 Nota: Por ahora esta HardCode el id del curriculum en el archivo `src\app\services\request.ts CURRICULUM_ID` por falta de tiempo no esta para cualquier usuario, si se desea usar, añadir el suyo, y para la votacion y/o revision porfavor contactarme para pasarles los accesos y probarlo de manera muy sencilla
 
 ## Variables de entorno
