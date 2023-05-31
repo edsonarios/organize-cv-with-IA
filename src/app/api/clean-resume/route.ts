@@ -4,7 +4,6 @@ import { cleanCV } from './cleanCV'
 export async function GET (request: Request) {
   try {
     const response = await cleanCV()
-    console.log(response)
 
     return NextResponse.json(response)
   } catch {

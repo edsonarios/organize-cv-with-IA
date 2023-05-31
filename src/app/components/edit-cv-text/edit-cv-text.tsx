@@ -28,7 +28,6 @@ export function EditCvText () {
     if (iaData !== null) {
       elementoRef.current?.scrollIntoView({ behavior: 'smooth' })
     }
-    console.log('effect')
   }, [iaData])
 
   const Guardar = async (cv: string) => {
@@ -42,15 +41,12 @@ export function EditCvText () {
           'Content-Type': 'application/json'
         }
       })
-      console.log(response)
       if (response.ok) {
-        console.log('exito')
         //   window.location.href = 'https://www.infojobs.net/candidate/cv/view/index.xhtml'
       } else {
         throw new Error('Error')
       }
     } catch (error) {
-      console.log('Error:', response?.statusText)
     }
     setLoadingGuardar(false)
   }
@@ -58,7 +54,6 @@ export function EditCvText () {
   const SaveCvWithIA = async (cv: string) => {
     setLoadingIA(true)
     setIaData(null)
-    console.log(toggleValue)
     if (toggleValue === 'Si') {
       setLoadingText('Limpiando CV...')
       try {
@@ -67,10 +62,7 @@ export function EditCvText () {
             'Content-Type': 'application/json'
           }
         })
-        console.log('CLEAN CV')
-        console.log(response)
         if (response.status === 500) {
-          console.log('ser error')
           setError({
             error: true,
             description: response.statusText
@@ -79,7 +71,6 @@ export function EditCvText () {
         const json = await response.json()
         console.log(json)
       } catch (error) {
-        console.log('Error: ', error)
       }
     }
 
@@ -91,10 +82,7 @@ export function EditCvText () {
         'Content-Type': 'application/json'
       }
     })
-    console.log('ORGANIZED IA')
-    console.log(response)
     const json = await response.json()
-    console.log(json)
 
     setLoadingText('Guardando CV...')
     const saveCV = await fetch('/api/save-resume/', {
@@ -105,18 +93,13 @@ export function EditCvText () {
       body: JSON.stringify(json)
     })
     setLoadingText('Mostrando respuesta...')
-    console.log('SAVE CV')
-    console.log(saveCV)
     const json2 = await saveCV.json()
-    console.log(json2)
 
     setIaData(json2)
     setLoadingIA(false)
   }
 
   const prueba = () => {
-    console.log('prueba')
-
     const dataFromIA: ResponseRequest = {
       personalData: {
         name: 'Sergio',
@@ -223,16 +206,10 @@ export function EditCvText () {
         }
       ]
     }
-    console.log(dataFromIA)
     setIaData(dataFromIA)
   }
   const prueba2 = async () => {
     setIaData(null)
-    // await fetch('/api/clean-resume/', {
-    //   headers: {
-    //     'Content-Type': 'application/json'
-    //   }
-    // })
   }
 
   return (

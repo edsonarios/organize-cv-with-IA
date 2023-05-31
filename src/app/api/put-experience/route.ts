@@ -21,12 +21,8 @@ export async function PUT (request: Request) {
     body: JSON.stringify(body)
   })
   const data = await response.json()
-  console.log(data)
   if (data.error !== null) {
-    console.log('error')
-    console.log(data)
     const errorMessage = data.error_description
-    console.log(errorMessage)
     return new Response('Error', { statusText: errorMessage })
   }
   return NextResponse.json(data)

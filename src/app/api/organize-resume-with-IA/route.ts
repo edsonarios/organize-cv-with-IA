@@ -170,9 +170,7 @@ export async function GET (request: Request) {
   let json
 
   try {
-    console.log(data)
     json = JSON.parse(data)
-    console.log(json)
     return NextResponse.json(json)
   } catch {
     return new Response('No se ha podido transformar el JSON', { status: 500 })

@@ -13,16 +13,12 @@ export async function putCVText () {
       Authorization: `Basic ${infoJobsToken}`
     }
   })
-  // const res = await PUT(cv)
   const json = await response.json()
-  console.log(json)
 
   return json
 }
 
 export async function putPersonalData (personalData: PersonalData) {
-  console.log(personalData)
-
   const response = await fetch(`${INFOJOBS_API}3/curriculum/${CURRICULUM_ID}/personaldata`, {
     method: 'PUT',
     headers: {
@@ -33,15 +29,11 @@ export async function putPersonalData (personalData: PersonalData) {
     body: JSON.stringify(personalData)
   })
 
-  console.log(response)
   const data = await response.json()
-  console.log(data)
   return data
 }
 
 export async function putExperience (experience: Experience) {
-  console.log(experience)
-
   const response = await fetch(`${INFOJOBS_API}4/curriculum/${CURRICULUM_ID}/experience`, {
     method: 'PUT',
     headers: {
@@ -52,15 +44,11 @@ export async function putExperience (experience: Experience) {
     body: JSON.stringify(experience)
   })
 
-  console.log(response)
   const data = await response.json()
-  console.log(data)
   return data
 }
 
 export async function putEducation (education: Education) {
-  console.log(education)
-
   const response = await fetch(`${INFOJOBS_API}2/curriculum/${CURRICULUM_ID}/education`, {
     method: 'PUT',
     headers: {
@@ -71,15 +59,11 @@ export async function putEducation (education: Education) {
     body: JSON.stringify(education)
   })
 
-  console.log(response)
   const data = await response.json()
-  console.log(data)
   return data
 }
 
 export async function getDictionary (dictionaryId: string): Promise<Dictionary[]> {
-  console.log('getDictionary', dictionaryId)
-
   const response = await fetch(`${INFOJOBS_API}1/dictionary/${dictionaryId}`, {
     method: 'GET',
     headers: {
@@ -90,7 +74,6 @@ export async function getDictionary (dictionaryId: string): Promise<Dictionary[]
   })
 
   const data = await response.json()
-  console.log(data)
   return data
 }
 
@@ -105,7 +88,6 @@ export async function getExperiences (): Promise<ResponseExperience[] | ErrorRes
   })
 
   const data = await response.json()
-  console.log(data)
   return data
 }
 
@@ -118,8 +100,6 @@ export async function deleteExperience (experienceId: string) {
       Authorization: `${infoJobsToken}`
     }
   })
-  console.log(response)
-  console.log(response.status)
   return response.status
 }
 
@@ -134,7 +114,6 @@ export async function getEducations (): Promise<ResponseEducation[]> {
   })
 
   const data = await response.json()
-  console.log(data)
   return data
 }
 
@@ -147,7 +126,5 @@ export async function deleteEducation (educationId: string) {
       Authorization: `${infoJobsToken}`
     }
   })
-  console.log(response)
-  console.log(response.status)
   return response.status
 }

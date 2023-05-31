@@ -20,21 +20,14 @@ let educationPromise: Promise<Dictionary[]> | null = null
 let courseCodePromise: Promise<Dictionary[]> | null = null
 
 export const cleanResponse = async (data: responseIA) => {
-  console.log(data)
   if (Object.keys(data.personalData).length > 0) {
-    console.log(data.personalData)
     data.personalData = await cleanPersonalData(data.personalData)
-    console.log(data.personalData)
   }
   if (Object.keys(data.experience).length > 0) {
-    console.log(data.experience)
     data.experience = await Promise.all(data.experience.map(cleanExperience))
-    console.log(data.experience)
   }
   if (Object.keys(data.education).length > 0) {
-    console.log(data.education)
     data.education = await Promise.all(data.education.map(cleanEducation))
-    console.log(data.education)
   }
   return data
 }
@@ -106,8 +99,6 @@ const cleanExperience = async (experience: Experience) => {
   if (!categoryKeys.includes(experience.category)) {
     experience.category = 'otros'
   }
-  console.log(experience.subcategories.length)
-  console.log(experience.subcategories.some(subcategory => subcategory.includes('-')))
   // Validate subcategory
   if (experience.subcategories.length > 0 && !experience.subcategories.some(subcategory => subcategory.includes('-'))) {
     if (subcategoryPromise == null) {
@@ -115,13 +106,9 @@ const cleanExperience = async (experience: Experience) => {
     }
     const subcategory = await subcategoryPromise
 
-    console.log(subcategory)
     const categoryValid = category.find((category) => category.key === experience.category)
-    console.log(categoryValid)
     const subcategoryFromCategoryValid = subcategory.filter(subcategory => subcategory.parent === categoryValid?.id)
-    console.log(subcategoryFromCategoryValid)
     const subcategoryKeys = subcategoryFromCategoryValid.map(subcategory => subcategory.key)
-    console.log(subcategoryKeys)
     experience.subcategories = experience.subcategories.filter(subcategory => subcategoryKeys.includes(subcategory) && subcategory !== '-')
     if (experience.subcategories.length === 0) {
       experience.subcategories = ['-']
@@ -159,7 +146,6 @@ const cleanEducation = async (education: Education) => {
   }
 
   // Validate courseCode
-  console.log(education.courseCode)
   const conditionToCoureCodeFromEducationLevelCode = ['postgrado', 'master', 'otros-titulos-certificaciones-y-carnes', 'otros-cursos-y-formacion-no-reglada']
   const condition = conditionToCoureCodeFromEducationLevelCode.includes(education.educationLevelCode)
 
@@ -170,15 +156,11 @@ const cleanEducation = async (education: Education) => {
     const courseCode = await courseCodePromise
 
     const educationLevelCodeValid = educationCode.find((educationCode) => educationCode.key === education.educationLevelCode)
-    console.log(educationLevelCodeValid)
 
     const courseCodeValid = courseCode.filter(courseCode => courseCode.parent === educationLevelCodeValid?.id)
 
-    console.log(courseCodeValid)
     const courseCodeKeys = courseCodeValid.map(courseCode => courseCode.key)
 
-    console.log(education.courseCode)
-    console.log(courseCodeKeys.includes(education.courseCode))
     if (!courseCodeKeys.includes(education.courseCode)) {
       education.educationLevelCode = 'otros-cursos-y-formacion-no-reglada'
       education.courseCode = ''
@@ -186,19 +168,14 @@ const cleanEducation = async (education: Education) => {
   } else {
     education.courseCode = ''
   }
-  console.log(education.courseCode)
 
   // Validate courseName
-  console.log(education.courseName)
   if (condition && education.courseName === '' && education.institutionName !== '') {
-    console.log(education.courseName)
     education.courseName = education.institutionName
   }
   if (condition && education.courseName === '' && education.institutionName === '') {
-    console.log(education.courseName)
     education.courseName = education.educationLevelCode
   }
-  console.log(education.courseName)
   // Validate startingDate
   const datePattern = /^\d{4}-\d{2}-\d{2}$/
   if (!datePattern.test(education.startingDate)) {
