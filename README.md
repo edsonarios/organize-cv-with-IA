@@ -1,7 +1,13 @@
 # Organiza tu CV con ayuda de la IA
 [Deploy: Organizar CV con IA](https://organize-cv-with-ia-production.up.railway.app/)
 
+[Video de como usarlo](https://youtu.be/vYoL4v98cJ4)
+
+[Documento para pruebas](https://docs.google.com/document/d/1NsdEr4S5_vKvU5NsF5Y9fLUW9lezfDvL/edit?usp=sharing&ouid=113147656865354451310&rtpof=true&sd=true)
+
 Para fines de prueba, las variables de entorno estaran desactivados, y solo se activara el dia de las votacions en el canal de Midudev, eso para evitar costos exorbitantes en ChatGPT
+
+Nota: Por ahora esta HardCode el id del curriculum en el archivo `src\app\services\request.ts CURRICULUM_ID` por falta de tiempo no esta para cualquier usuario, si se desea usar, añadir el suyo, y para la votacion y/o revision porfavor contactarme para pasarles los accesos y probarlo de manera muy sencilla
 
 ## Variables de entorno
 
