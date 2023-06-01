@@ -41,6 +41,8 @@ export function EditCvText () {
           'Content-Type': 'application/json'
         }
       })
+      const json = await response.json()
+      console.log(json)
       if (response.ok) {
         //   window.location.href = 'https://www.infojobs.net/candidate/cv/view/index.xhtml'
       } else {
