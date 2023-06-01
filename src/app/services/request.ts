@@ -1,4 +1,4 @@
-import { ErrorResponse, Dictionary, ResponseEducation, ResponseExperience } from '@/types/infojobs/response'
+import { ErrorResponse, Dictionary, ResponseEducation, ResponseExperience, Curriculum } from '@/types/infojobs/response'
 
 import { Education, Experience, PersonalData } from '@/types/responseIA'
 
@@ -19,8 +19,10 @@ export async function getCurriculum () {
 
 async function getIdCurriculum () {
   if (CURRICULUM_ID === '') {
-    const Curriculum = await getCurriculum()
-    CURRICULUM_ID = Curriculum[0].code
+    const Curriculum = await getCurriculum() as Curriculum[]
+    if (Curriculum[0] !== null) {
+      CURRICULUM_ID = Curriculum[0].code
+    }
   }
 }
 

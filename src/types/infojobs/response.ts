@@ -1,5 +1,14 @@
 import { Education, Experience, PersonalData } from '../responseIA'
 
+export interface Curriculum {
+  id: number
+  code: string
+  name: string
+  principal: boolean
+  completed: boolean
+  incompleteSteps: []
+}
+
 export interface Dictionary {
   id: number
   value: string
