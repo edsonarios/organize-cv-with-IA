@@ -17,10 +17,11 @@ export function EditCvText () {
   const [iaData, setIaData] = useState<ResponseRequest | null>(null)
   const elementoRef = useRef<HTMLDivElement>(null)
   const [toggleValue, setToggleValue] = useState('No')
-  const loadingText = useStore(state => state.loadingText)
-  const setLoadingText = useStore(state => state.setLoadingText)
-  const setError = useStore((state) => state.setError)
-  const { login } = useStore(state => state)
+
+  // const loadingText = useStore(state => state.loadingText)
+  // const setLoadingText = useStore(state => state.setLoadingText)
+  // const setError = useStore((state) => state.setError)
+  const { loadingText, setLoadingText, setError, login } = useStore(state => state)
 
   const handleChange = (event: any) => {
     setTextAreaValue(event.target.value)

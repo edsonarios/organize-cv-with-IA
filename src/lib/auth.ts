@@ -1,17 +1,13 @@
-
-import NextAuth, { NextAuthOptions } from 'next-auth'
 import InfojobsProvider from 'infojobs-next-auth-provider'
-
+import { NextAuthOptions } from 'next-auth'
 const clientId = process.env.CLIENT_ID ?? ''
 const clientSecret = process.env.CLIENT_SECRET ?? ''
 
-declare module 'next-auth' {
-  interface Session {
-    accessToken?: string
-    refreshToken?: string
-  }
-}
 export const authOptions: NextAuthOptions = {
+  pages: {
+    signIn: '/',
+    signOut: '/'
+  },
   providers: [
     InfojobsProvider({
       clientId,
@@ -29,12 +25,12 @@ export const authOptions: NextAuthOptions = {
       return token
     },
     async session ({ session, token }) {
+      // @ts-expect-error
       session.accessToken = token.accessToken
+      // @ts-expect-error
       session.refreshToken = token.refreshToken
       return session
     }
   },
   debug: false
 }
-const handler = NextAuth(authOptions)
-export { handler as GET, handler as POST }
