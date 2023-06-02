@@ -8,6 +8,7 @@ import { PersonalData } from './personalData'
 import { ErrorList } from './error'
 import { useStore } from '@/app/store/store'
 import { ErrorSnackbar } from '../errors/errors'
+import { LoginButton } from './login-button'
 
 export function EditCvText () {
   const [loadingGuardar, setLoadingGuardar] = useState(false)
@@ -19,6 +20,7 @@ export function EditCvText () {
   const loadingText = useStore(state => state.loadingText)
   const setLoadingText = useStore(state => state.setLoadingText)
   const setError = useStore((state) => state.setError)
+  const { login } = useStore(state => state)
 
   const handleChange = (event: any) => {
     setTextAreaValue(event.target.value)
@@ -216,6 +218,7 @@ export function EditCvText () {
 
   return (
     <>
+      <LoginButton />
       <div className='max-w-full flex flex-col'>
         <Card className='max-w-4xl mx-auto flex flex-col'>
           <Title className='mx-auto text-center'>Editar CV en texto</Title>
@@ -230,7 +233,7 @@ export function EditCvText () {
             <Col numColSpan={1} numColSpanLg={2}>
               <Button
                 size='xl' className='mt-8 mr-4'
-                disabled={loadingGuardar}
+                disabled={loadingGuardar || !login.isLogged}
                 loading={loadingGuardar}
                 loadingText='Guardando...'
                 onClick={async (event) => {
@@ -247,7 +250,7 @@ export function EditCvText () {
 
             <Button
               size='sm' variant='secondary' className='mt-8 flex-grow mr-2'
-              disabled={loadingIA}
+              disabled={loadingIA || !login.isLogged}
               loading={loadingIA}
               loadingText={loadingText}
               onClick={async (event) => {

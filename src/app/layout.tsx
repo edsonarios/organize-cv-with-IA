@@ -1,3 +1,4 @@
+import { AuthProvider } from './components/edit-cv-text/auth-provider'
 import { Logo } from './components/icons/logo'
 import './globals.css'
 import { Inter } from 'next/font/google'
@@ -17,23 +18,25 @@ export default function RootLayout ({
   return (
     <html lang='es'>
       <body className={inter.className}>
-        <header className='py-10'>
-          <h1 className='flex flex-col items-center justify-center text-lg'>
-            <Logo />
-            <strong className='font-semibold tracking-wider text-black/80'>Organizar tu CV con ayuda de la IA</strong><br />
-          </h1>
-          <h5 className='flex flex-col items-center justify-center text-base'>
-            Actualiza Datos personales, Añade tus Experiencias laborales y Añade los estudios que tengas
-          </h5>
-          <h5 className='flex flex-col items-center justify-center text-base'>
-            Solo copia todo tu CV en el cuadro de texto y deja que la IA haga su magia
-          </h5><br />
-          <h5 className='flex flex-col items-center justify-center text-base text-green-500'>
-            HABILITADO PARA PRUEBAS
-          </h5>
-        </header>
+        <AuthProvider>
+          <header className='py-10'>
+            <h1 className='flex flex-col items-center justify-center text-lg'>
+              <Logo />
+              <strong className='font-semibold tracking-wider text-black/80'>Organizar tu CV con ayuda de la IA</strong><br />
+            </h1>
+            <h5 className='flex flex-col items-center justify-center text-base'>
+              Actualiza Datos personales, Añade tus Experiencias laborales y Añade los estudios que tengas
+            </h5>
+            <h5 className='flex flex-col items-center justify-center text-base'>
+              Solo copia todo tu CV en el cuadro de texto y deja que la IA haga su magia
+            </h5><br />
+            <h5 className='flex flex-col items-center justify-center text-base text-green-500'>
+              HABILITADO PARA PRUEBAS
+            </h5>
+          </header>
 
-        {children}
+          {children}
+        </AuthProvider>
       </body>
     </html>
   )
