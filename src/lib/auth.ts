@@ -4,15 +4,11 @@ const clientId = process.env.CLIENT_ID ?? ''
 const clientSecret = process.env.CLIENT_SECRET ?? ''
 
 export const authOptions: NextAuthOptions = {
-  pages: {
-    signIn: '/',
-    signOut: '/'
-  },
   providers: [
     InfojobsProvider({
       clientId,
       clientSecret,
-      redirect_uri: 'https://organize-cv-with-ia.vercel.app/',
+      redirect_uri: 'https://organize-cv-with-ia.vercel.app',
       infojobs_scopes: 'MY_APPLICATIONS,CANDIDATE_PROFILE_WITH_EMAIL,CANDIDATE_READ_CURRICULUM_SKILLS,CV,CANDIDATE_READ_CURRICULUM_EXPERIENCE,CANDIDATE_EDIT_CURRICULUM_EXPERIENCE,CANDIDATE_READ_CURRICULUM_CVTEXT,CANDIDATE_EDIT_CURRICULUM_CVTEXT,CANDIDATE_EDIT_CURRICULUM_EDUCATION,CANDIDATE_READ_CURRICULUM_EDUCATION,CANDIDATE_EDIT_CURRICULUM_PERSONAL_DATA,CANDIDATE_READ_CURRICULUM_PERSONAL_DATA,CANDIDATE_DELETE_CURRICULUM_EXPERIENCE,CANDIDATE_DELETE_CURRICULUM_EDUCATION'
     })
   ],
