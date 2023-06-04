@@ -6,14 +6,15 @@ import { useSession, signIn, signOut } from 'next-auth/react'
 export function LoginButton () {
   const { data, status } = useSession()
   const setLogin = useStore(state => state.setLogin)
-  console.log('some')
+  console.log(data)
 
   if (status !== 'authenticated') {
     return (
       <>
         <Button
           onClick={async (e) => {
-            await signIn('infojobs')
+            e.preventDefault()
+            await signIn()
           }}
           size='xs'
         >Iniciar Sesion
