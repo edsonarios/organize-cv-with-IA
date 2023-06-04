@@ -1,4 +1,4 @@
-import create, { SetState } from 'zustand'
+import create from 'zustand'
 interface Error {
   error: boolean
   description: string
@@ -19,7 +19,7 @@ interface State {
   setLogin: (error: Login) => void
 }
 
-export const useStore = create<State>((set: SetState<State>) => ({
+export const useStore = create<State>()((set) => ({
   loadingText: '',
   setLoadingText: (newLoadingText: string) => set(() => ({ loadingText: newLoadingText })),
 
@@ -31,7 +31,7 @@ export const useStore = create<State>((set: SetState<State>) => ({
 
   login: {
     user: '',
-    isLogged: false
+    isLogged: true
   },
   setLogin: (login: Login) => set(() => ({ login }))
 }))
