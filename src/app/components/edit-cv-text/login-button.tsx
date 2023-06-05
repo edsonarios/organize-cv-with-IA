@@ -7,6 +7,7 @@ export function LoginButton () {
   const { data, status } = useSession()
   const { login, setLogin } = useStore(state => state)
   console.log(data, status)
+  console.log(login)
   if (status !== 'authenticated') {
     return (
       <>
@@ -16,7 +17,7 @@ export function LoginButton () {
             await signIn('infojobs')
           }}
           size='xs'
-          disabled={login}
+          // disabled={login}
         >Iniciar Sesion
         </Button>
       </>

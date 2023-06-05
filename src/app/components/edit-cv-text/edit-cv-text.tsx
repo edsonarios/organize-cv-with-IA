@@ -18,9 +18,6 @@ export function EditCvText () {
   const elementoRef = useRef<HTMLDivElement>(null)
   const [toggleValue, setToggleValue] = useState('No')
 
-  // const loadingText = useStore(state => state.loadingText)
-  // const setLoadingText = useStore(state => state.setLoadingText)
-  // const setError = useStore((state) => state.setError)
   const { loadingText, setLoadingText, setError, login } = useStore(state => state)
 
   const handleChange = (event: any) => {
@@ -214,6 +211,15 @@ export function EditCvText () {
     setIaData(dataFromIA)
   }
   const prueba2 = async () => {
+    console.log('prueba2')
+    const response = await fetch('/api/get-curriculum/', {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+    console.log(response)
+    const json = await response.json()
+    console.log(json)
     setIaData(null)
   }
 

@@ -1,20 +1,27 @@
 import { ErrorResponse, Dictionary, ResponseEducation, ResponseExperience, Curriculum } from '@/types/infojobs/response'
 
 import { Education, Experience, PersonalData } from '@/types/responseIA'
+import { getSession } from 'next-auth/react'
 
-const infoJobsToken = process.env.INFOJOBS_TOKEN ?? ''
 const INFOJOBS_API = 'https://api.infojobs.net/api/'
+const CLIENT_ID = process.env.CLIENT_ID ?? ''
+const CLIENT_SECRET = process.env.CLIENT_SECRET ?? ''
+let infoJobsToken = `Basic ${Buffer.from(`${CLIENT_ID}:${CLIENT_SECRET}`).toString('base64')}, `
+let TOKEN_INFOJOBS = ''
 let CURRICULUM_ID = ''
 
-export async function getCurriculum () {
-  const response = await fetch('https://api.infojobs.net/api/2/curriculum', {
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization: `${infoJobsToken}`
+async function getToken () {
+  console.log(TOKEN_INFOJOBS)
+  if (TOKEN_INFOJOBS === '') {
+    console.log('paso')
+    const session = await getSession()
+    if (session?.accessToken === undefined) {
+      TOKEN_INFOJOBS = process.env.INFOJOBS_TOKEN ?? ''
+      // throw new Error('No access token')
     }
-  })
-  const json = await response.json()
-  return json
+    TOKEN_INFOJOBS = session?.accessToken as string
+    infoJobsToken += `Bearer ${TOKEN_INFOJOBS}`
+  }
 }
 
 async function getIdCurriculum () {
@@ -24,6 +31,20 @@ async function getIdCurriculum () {
       CURRICULUM_ID = Curriculum[0].code
     }
   }
+}
+
+export async function getCurriculum () {
+  await getToken()
+  const response = await fetch('https://api.infojobs.net/api/2/curriculum', {
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `${infoJobsToken}`
+    }
+  })
+  console.log(response)
+  const json = await response.json()
+  console.log(json)
+  return json
 }
 
 export async function putCVText (cv: string) {
@@ -90,7 +111,7 @@ export async function putEducation (education: Education) {
 }
 
 export async function getDictionary (dictionaryId: string): Promise<Dictionary[]> {
-  await getIdCurriculum()
+  await getToken()
   const response = await fetch(`${INFOJOBS_API}1/dictionary/${dictionaryId}`, {
     method: 'GET',
     headers: {

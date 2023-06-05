@@ -31,7 +31,7 @@ export const useStore = create<State>()((set) => ({
 
   login: {
     user: '',
-    isLogged: true
+    isLogged: false
   },
   setLogin: (login: Login) => set(() => ({ login }))
 }))
