@@ -14,12 +14,14 @@ async function getToken () {
   console.log(TOKEN_INFOJOBS)
   if (TOKEN_INFOJOBS === '') {
     console.log('paso')
+    // TOKEN_INFOJOBS = process.env.INFOJOBS_TOKEN ?? ''
     const session = await getSession()
     if (session?.accessToken === undefined) {
       TOKEN_INFOJOBS = process.env.INFOJOBS_TOKEN ?? ''
       // throw new Error('No access token')
+    } else {
+      TOKEN_INFOJOBS = session?.accessToken
     }
-    TOKEN_INFOJOBS = session?.accessToken as string
     infoJobsToken += `Bearer ${TOKEN_INFOJOBS}`
   }
 }
